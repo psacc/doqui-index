@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<!-- Schedule index tracking for ADM -->
+	<bean id="admIndexTrackerTrigger"
+		class="org.alfresco.util.CronTriggerBean">
+		<property name="jobDetail">
+			<bean
+				class="org.springframework.scheduling.quartz.JobDetailBean">
+				<property name="jobClass">
+					<value>
+						org.alfresco.repo.node.index.IndexRecoveryJob
+					</value>
+				</property>
+				<property name="jobDataAsMap">
+					<map>
+						<entry key="indexRecoveryComponent">
+							<ref bean="admIndexTrackerComponent" />
+						</entry>
+					</map>
+				</property>
+			</bean>
+		</property>
+		<property name="scheduler">
+			<ref bean="schedulerFactory" />
+		</property>
+		<property name="cronExpression">
+			<value>${index.tracking.adm.cronExpression}</value>
+		</property>
+	</bean>
+
+	<!-- Schedule index tracking for AVM -->
+	<bean id="avmIndexTrackerTrigger"
+		class="org.alfresco.util.CronTriggerBean">
+		<property name="jobDetail">
+			<bean
+				class="org.springframework.scheduling.quartz.JobDetailBean">
+				<property name="jobClass">
+					<value>
+						org.alfresco.repo.node.index.IndexRecoveryJob
+					</value>
+				</property>
+				<property name="jobDataAsMap">
+					<map>
+						<entry key="indexRecoveryComponent">
+							<ref bean="avmIndexTrackerComponent" />
+						</entry>
+					</map>
+				</property>
+			</bean>
+		</property>
+		<!-- property name="scheduler">
+			<ref bean="schedulerFactory" />
+		</property -->
+		<property name="cronExpression">
+			<value>${index.tracking.avm.cronExpression}</value>
+		</property>
+	</bean>
+
+</beans>
+

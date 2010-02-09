@@ -1,0 +1,70 @@
+<porta-delegata name="pd_dosign">
+	<services>
+		<service name="dosign" public-interface-class="it.doqui.dosign.dosign.interfacecsi.dosign.DosignInterface">
+			<operations>
+				<operation name="testResources" type="synch-call">
+					<param-list />
+					<ret-val type="boolean" />
+				</operation>
+                <!--
+				<operation name="callTimestamping" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.timestamping.TimestampingInformationFileContent" />
+					</param-list>
+					<ret-val type="byte[]" />
+				</operation>
+				<operation name="verifySignature" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.signature.SignatureInformationFileContent" />
+					</param-list>
+					<ret-val type="it.doqui.dosign.dosign.dto.signature.Signature" />
+				</operation>
+				<operation name="crypt" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.crypt.CryptInformationFileContent" />
+					</param-list>
+					<ret-val type="byte[]" />
+				</operation>
+				<operation name="decrypt" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.crypt.DecryptInformationFileContent" />
+					</param-list>
+					<ret-val type="byte[]" />
+				</operation>
+				<operation name="getSignaturesNumber" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.signature.SignatureInformationFileContent" />
+					</param-list>
+					<ret-val type="int" />
+				</operation>
+                -->
+				<operation name="verifyDocument" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.signature.SignedBuffer" />
+					</param-list>
+					<ret-val type="it.doqui.dosign.dosign.dto.signature.VerifyReport" />
+				</operation>
+				<operation name="extractDocumentFromEnvelope" type="synch-call">
+					<param-list>
+						<param name="par1" type="it.doqui.dosign.dosign.dto.envelope.EnvelopedBuffer" />
+					</param-list>
+					<ret-val type="it.doqui.dosign.dosign.dto.envelope.Document" />
+				</operation>
+			</operations>
+		</service>
+	</services>
+	<config>
+		<url-pa></url-pa>
+		<pluggable-pd-list chooser-class="it.csi.csi.porte.FixedDelegateChooser">
+			<pluggable-pd name="dosign" class="it.csi.csi.porte.ejb20.PortaDelegataEJB" url-pa="dosign/ejb/DosignPA">
+				<properties>
+					<property name="java.naming.provider.url"    value="@@dosign_url_to_connect@@" />
+					<property name="java.naming.factory.initial" value="org.jnp.interfaces.NamingContextFactory" />
+					<property name="jnp.partitionName"           value="" />
+					<property name="jnp.disableDiscovery"        value="" />
+				</properties>
+			</pluggable-pd>
+		</pluggable-pd-list>
+		<queue-manager url="" />
+	</config>
+</porta-delegata>

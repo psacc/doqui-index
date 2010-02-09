@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+    <bean id="readersService" 
+    	class="it.doqui.index.ecmengine.business.personalization.security.ReadersServiceImpl" >
+    	
+        <property name="nodeService" ref="nodeService" />
+        <property name="authorityService" ref="authorityService" />
+        <property name="permissionService" ref="permissionServiceImpl"/>
+        <property name="ownableService" ref="ownableService"/>
+        <property name="permissionModelDAO" ref="permissionsModelDAO"/>
+    </bean>
+</beans>

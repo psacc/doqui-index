@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<!-- Abstract bean definition defining base definition for content service -->
+	<bean id="baseContentService" class="@@contentServiceClass@@"
+		abstract="true" init-method="init">
+		<property name="transactionService" ref="transactionService" />
+		<property name="retryingTransactionHelper" ref="retryingTransactionHelper" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="nodeService" ref="nodeService" />
+		<property name="transformerRegistry" ref="contentTransformerRegistry" />
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="avmService" ref="avmService" />
+		<property name="imageMagickContentTransformer" ref="transformer.ImageMagick" />
+		<property name="tenantService">
+			<ref bean="tenantService" />
+		</property>
+	</bean>
+
+	<!-- Performs the content cleanup -->
+	<bean id="contentStoreCleaner"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.ContentStoreCleaner"
+		parent="baseContentStoreCleaner" >
+		<property name="repositoryManager" ref="repositoryManager"/>
+		<property name="stores" >
+			<list>
+				<ref bean="fileContentStore" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

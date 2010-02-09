@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <!-- Job manager -->
+
+	<bean id="ecmengineJobDAO" class="it.doqui.index.ecmengine.integration.job.dao.JobDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+    <bean id="ecmengineJobManagerTarget" class="it.doqui.index.ecmengine.business.job.JobManager">
+    	<property name="jobDAO" ref="ecmengineJobDAO" />
+    </bean>
+
+    <bean id="ecmengineJobManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>it.doqui.index.ecmengine.business.job.JobBusinessInterface</value>
+        </property>
+        <property name="transactionManager">
+            <ref bean="transactionManager" />
+        </property>
+        <property name="target">
+            <ref bean="ecmengineJobManagerTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">${server.transaction.mode.default}, PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

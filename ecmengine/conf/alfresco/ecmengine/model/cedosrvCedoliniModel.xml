@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model name="cmd:crecedomodel"
+	xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<description>DOQUI model for CRECEDO</description>
+	<author>DOQUI Group</author>
+	<version>1.0</version>
+
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<import uri="http://www.alfresco.org/model/content/1.0"
+			prefix="cm" />
+	</imports>
+
+	<namespaces>
+		<namespace uri="http://www.doqui.it/model/crecedo/1.0"
+			prefix="cmd" />
+	</namespaces>
+
+	<constraints>
+		<constraint name="cmd:minmaxmese" type="MINMAX">
+			<parameter name="minValue">
+				<value>1</value>
+			</parameter>
+			<parameter name="maxValue">
+				<value>12</value>
+			</parameter>
+		</constraint>
+		<constraint name="cmd:minmaxanno" type="MINMAX">
+			<parameter name="minValue">
+				<value>2007</value>
+			</parameter>
+			<parameter name="maxValue">
+				<value>2020</value>
+			</parameter>
+		</constraint>
+	</constraints>
+  
+    <types>
+		<type name="cmd:cedolino">
+      		<title>Cedolino</title>
+      		<parent>cm:content</parent>
+      		<properties>
+				<property name="cmd:idente">
+					<title>Codice Ente</title>
+      				<type>d:text</type>
+      				<mandatory enforced="true">true</mandatory>
+	      		</property>	 	
+				<property name="cmd:exente">
+					<title>Ex-ente</title>
+      				<type>d:text</type>
+					<mandatory enforced="true">true</mandatory>
+     	 		</property>	
+				<property name="cmd:matricola">
+					<title>Matricola</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>	 
+				<property name="cmd:tipodocumento">
+					<title>Tipo documento</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:nome">
+					<title>Nome</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>	
+				<property name="cmd:cognome">
+					<title>Cognome</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>	
+				<property name="cmd:datanascita">
+					<title>Data di nascita</title>
+	      			<type>d:date</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>	
+				<property name="cmd:mese">
+					<title>Mese</title>
+	      			<type>d:int</type>
+	      			<mandatory enforced="true">true</mandatory>
+					<constraints>
+						<constraint ref="cmd:minmaxmese"/>
+					</constraints>
+				</property>	    
+				<property name="cmd:anno">
+					<title>Anno</title>
+	      			<type>d:int</type>
+	      			<mandatory enforced="true">true</mandatory>
+					<constraints>
+						<constraint ref="cmd:minmaxanno"/>
+					</constraints>
+	   			</property>	     
+				<property name="cmd:tipocedolino">
+					<title>Tipo cedolino</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>	    
+				<property name="cmd:codicefiscale">
+					<title>Codice fiscale</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>	        		     		 		  		
+				<property name="cmd:email">
+					<title>Indirizzo e-mail</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:numerofoglioretribuzione">
+					<title>Numero foglio retribuzione</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:dimensioneKB">
+					<title>Dimensione KB</title>
+	      			<type>d:double</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:crittografato">
+					<title>Crittografato</title>
+	      			<type>d:boolean</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:idistanza">
+					<title>Identificativo istanza</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:progflussoente">
+					<title>Progressivo flusso ente</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:lotto">
+					<title>Lotto</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:stato">
+					<title>Stato</title>
+	      			<type>d:int</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:datacaricamento">
+					<title>Data caricamento</title>
+	      			<type>d:date</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:datainserimento">
+					<title>Data inserimento</title>
+	      			<type>d:date</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:dataonline">
+					<title>Data pubblicazione on-line</title>
+	      			<type>d:date</type>
+	      			<mandatory>false</mandatory>
+	      		</property>
+				<property name="cmd:spoolfilename">
+					<title>Nome file di spool</title>
+	      			<type>d:text</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:numeropagine">
+					<title>Numero pagine</title>
+	      			<type>d:int</type>
+	      			<mandatory enforced="true">true</mandatory>
+	      		</property>
+				<property name="cmd:timestampservizio">
+					<title>Timestamp di servizio</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="cmd:matricolafillata">
+					<title>Matricola a lunghezza fissa</title>
+					<type>d:text</type>
+					<mandatory enforced="true">true</mandatory>
+				</property>
+			</properties>
+		</type>           
+	</types>
+</model>

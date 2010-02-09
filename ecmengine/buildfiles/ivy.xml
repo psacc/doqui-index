@@ -1,0 +1,338 @@
+<ivy-module version="1.0">
+
+    <info organisation="csipiemonte" module="ecmengine"/>
+
+    <dependencies>
+
+      <dependency org="csipiemonte" name="csi" rev="1.4.5" >
+        <artifact name="csi-core-1.4.5" type="jar" />
+        <artifact name="csi-ejb-1.4.5" type="jar" />
+        <artifact name="csi-rmi-1.4.5" type="jar" />
+        <artifact name="csi-apachesoap-1.4.5" type="jar" />
+        <artifact name="csi-stadapter-1.4.5" type="jar" />
+        <artifact name="csi-tools-1.4.5" type="jar" />
+      </dependency>
+
+      <dependency org="csipiemonte" name="util-perf" rev="1.0.1" >
+      </dependency>
+
+      <dependency org="bea" name="weblogic" rev="9.2.2.0" >
+      </dependency>
+
+	  <dependency org="alfresco" name="alfresco" rev="484-2.9.3B" >
+	  </dependency>
+
+	  <dependency org="alfresco" name="poi" rev="2.5.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="acegi" rev="0.8.2" >
+	  </dependency>
+
+      <dependency org="alfresco" name="aopalliance" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="ehcache" rev="1.3.0-patched" >
+	  </dependency>
+
+      <dependency org="alfresco" name="glaforge" rev="1.0" >
+	  </dependency>
+
+      <dependency org="alfresco" name="jce" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="jcr" rev="1.0" >
+	  </dependency>
+
+      <dependency org="alfresco" name="jibx" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="json" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="jut" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="objectweb" rev="2.2" >
+	  </dependency>
+
+      <dependency org="alfresco" name="odfutils" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="saxpath" rev="1.0" >
+	  </dependency>
+
+      <dependency org="alfresco" name="sciencething" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="vladium" rev="2.1" >
+	  </dependency>
+
+      <dependency org="alfresco" name="wss4j" rev="2.1" >
+	  </dependency>
+
+	  <dependency org="alfresco" name="xsd2jibx" rev="1.0.0" >
+	  </dependency>
+
+      <dependency org="apache" name="commons-logging" rev="1.0.4" >
+        <artifact name="commons-logging-1.0.4" type="jar" />
+		<artifact name="commons-logging-api-1.0.4" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-beanutils" rev="1.7.0" >
+        <artifact name="commons-beanutils-1.7.0" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-codec" rev="1.3" >
+        <artifact name="commons-codec-1.3" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-collections" rev="3.1" >
+        <artifact name="commons-collections-3.1" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-dbcp" rev="1.2.1" >
+        <artifact name="commons-dbcp-1.2.1" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-digester" rev="1.6" >
+        <artifact name="commons-digester-1.6" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-discovery" rev="0.2" >
+        <artifact name="commons-discovery-0.2" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-fileupload" rev="1.1.1" >
+        <artifact name="commons-fileupload-1.1.1" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-io" rev="1.1" >
+        <artifact name="commons-io-1.1" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-lang" rev="2.1" >
+        <artifact name="commons-lang-2.1" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="commons-validator" rev="1.1.3" >
+        <artifact name="commons-validator-1.1.3" type="jar" />
+	  </dependency>
+
+      <dependency org="apache" name="jakarta-oro" rev="2.0.8" >
+        <artifact name="jakarta-oro-2.0.8" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="commons-el" rev="1.0" >
+        <artifact name="commons-el-1.0" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="commons-httpclient" rev="3.0.1" >
+        <artifact name="commons-httpclient-3.0.1" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="commons-jxpath" rev="1.2" >
+        <artifact name="commons-jxpath-1.2" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="commons-modeler" rev="1.1.0" >
+        <artifact name="commons-modeler-1.1.0" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="commons-pool" rev="1.3" >
+        <artifact name="commons-pool-1.3" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="log4j" rev="1.2.15" >
+	  </dependency>
+
+	  <dependency org="apache" name="bsf" rev="2.4.0" >
+	  </dependency>
+
+	  <dependency org="apache" name="fop" rev="0.92beta" >
+	  </dependency>
+
+	  <dependency org="apache" name="lucene" rev="2.1.0" >
+	  </dependency>
+
+	  <dependency org="apache" name="bcel" rev="5.1" >
+	  </dependency>
+
+	  <dependency org="apache" name="avalon-framework" rev="4.2.0" >
+	  </dependency>
+
+	  <dependency org="apache" name="ant" rev="1.6.5" >
+	  </dependency>
+
+	  <dependency org="apache" name="antlr" rev="2.7.5" >
+	  </dependency>
+
+	  <dependency org="apache" name="xerces" rev="2.8.0" >
+	  </dependency>
+
+	  <dependency org="apache" name="xerces" rev="1.3.3" >
+        <artifact name="xml-apis-1.3.3" type="jar" />
+	  </dependency>
+
+	  <dependency org="apache" name="tomcat" rev="5.5.15" >
+	  </dependency>
+
+	  <dependency org="doqui" name="axis" rev="1.4" >
+	  </dependency>
+
+	  <dependency org="doqui" name="axis-ant" rev="1.4" >
+	  </dependency>
+
+	  <dependency org="apache" name="shale" rev="1.0.4" >
+	  </dependency>
+
+
+	  <dependency org="bouncycastle" name="bcprov-jdk15" rev="137" >
+	  </dependency>
+
+	  <dependency org="bouncycastle" name="bcmail-jdk15" rev="137" >
+	  </dependency>
+
+	  <dependency org="codehaus" name="jaxen" rev="1.1" >
+          <artifact name="jaxen-1.1-beta-8" type="jar"/>
+	  </dependency>
+
+	  <dependency org="marquee" name="xmlrpc" rev="1.3" >
+ 	  </dependency>
+
+	  <dependency org="openoffice" name="openoffice" rev="2.0.3" >
+	  </dependency>
+
+      <dependency org="opensymphony" name="quartz" rev="1.6.0" >
+	  </dependency>
+
+  	  <dependency org="others" name="junit" rev="3.8.1" >
+	  </dependency>
+
+      <dependency org="others" name="wsdl4j" rev="1.5.1" >
+ 	  </dependency>
+
+      <dependency org="others" name="dom4j" rev="1.6.1" >
+ 	  </dependency>
+
+	  <dependency org="others" name="hibernate" rev="3.2.1" >
+	  </dependency>
+
+	  <dependency org="others" name="jboss" rev="4.0.5">
+	  </dependency>
+
+	  <dependency org="others" name="jboss" rev="4.3.0">
+	  </dependency>
+
+	  <dependency org="others" name="spring" rev="2.0.2" >
+	  </dependency>
+
+	  <dependency org="others" name="addressing" rev="1.0.2" >
+        <artifact name="addressing-1.0.2" type="jar" />
+	  </dependency>
+
+	  <dependency org="others" name="xmlpull" rev="1.1.3_8" >
+	  </dependency>
+
+	  <dependency org="others" name="freemarker" rev="2.3.10" >
+        <artifact name="freemarker-2.3.10" type="jar" />
+	  </dependency>
+
+	  <dependency org="others" name="jbpm" rev="3.2" >
+	  </dependency>
+
+	  <dependency org="others" name="jgroups" rev="2.2.8" >
+	  </dependency>
+
+	  <dependency org="others" name="beanshell" rev="1.3.0" >
+	  </dependency>
+
+	  <dependency org="others" name="jooconverter" rev="2.1.0" >
+	  </dependency>
+
+	  <dependency org="others" name="odmg" rev="3.0" >
+	  </dependency>
+
+	  <dependency org="others" name="jug" rev="1.1.2" >
+	  </dependency>
+
+	  <dependency org="others" name="thoughtworks" rev="1.1.3" >
+	  </dependency>
+
+	  <dependency org="others" name="pdfbox" rev="0.7.3" >
+	  </dependency>
+
+	  <dependency org="others" name="springmodules" rev="0.1" >
+	  </dependency>
+
+	  <dependency org="others" name="opensaml" rev="1.0.1" >
+	  </dependency>
+
+	  <dependency org="others" name="textmining" rev="0.4" >
+	  </dependency>
+
+	  <dependency org="others" name="jid3lib" rev="0.5" >
+	  </dependency>
+
+	  <dependency org="others" name="rhino" rev="1.6R7" >
+	  </dependency>
+
+	  <dependency org="others" name="xmlsec" rev="1.4.1" >
+	  </dependency>
+
+	  <dependency org="others" name="htmlparser" rev="1.6" >
+	  </dependency>
+
+	  <dependency org="others" name="fontbox" rev="0.1.0" >
+	  </dependency>
+
+	  <dependency org="others" name="jaxme-js" rev="0.3" >
+	  </dependency>
+
+
+	  <dependency org="schlichtherle" name="tlc" rev="1.24" >
+	  </dependency>
+
+	  <dependency org="schlichtherle" name="truezip" rev="5.1.2.1" >
+	  </dependency>
+
+
+	  <dependency org="sun" name="activation" rev="1.0.2" >
+	  </dependency>
+
+	  <dependency org="doqui" name="jaxrpc" rev="1.1" >
+	  </dependency>
+
+	  <dependency org="sun" name="mail" rev="1.3.2" >
+	  </dependency>
+
+	  <dependency org="doqui" name="saaj" rev="1.2" >
+	  </dependency>
+
+	  <dependency org="tigris" name="subetha-smtp" rev="1.2" >
+	  </dependency>
+
+	  <dependency org="doqui" name="dosign" rev="1.0.0" >
+        <artifact name="dosign-client-1.0.0" type="jar" />
+        <artifact name="dosign-common-1.0.0" type="jar" />
+	  </dependency>
+
+	  <dependency org="doqui" name="fileformat" rev="1.0.0" >
+        <artifact name="fileformat-1.0.0" type="jar" />
+	  </dependency>
+
+	  <dependency org="csipiemonte" name="coop-trace" rev="1.2.2" >
+		<artifact name="coop-trace-1.2.2" type="jar" />
+	  </dependency>
+
+	  <dependency org="bouncycastle" name="bcprov-jdk15" rev="137" >
+      </dependency>
+
+	  <dependency org="bouncycastle" name="bcmail-jdk15" rev="137" >
+      </dependency>
+
+	  <dependency org="apache" name="cxf" rev="2.2.3" >
+      </dependency>
+
+    </dependencies>
+
+</ivy-module>

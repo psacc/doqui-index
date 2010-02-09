@@ -1,0 +1,109 @@
+<dso>
+<instrumented-classes>
+<include>
+<class-expression>it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService</class-expression>
+<honor-transient>true</honor-transient>
+</include>
+<include>
+<class-expression>org.apache.lucene.util.PriorityQueue</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.ScoreDoc</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.document.Document</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.document.Field</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.document.AbstractField</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.document.MapFieldSelector</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.document.FieldSelectorResult</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.Sort</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.SortField</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.FieldDoc</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.misc.ChainedFilter</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.Filter</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.QueryWrapperFilter</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.BooleanQuery</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.Query</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.BooleanClause</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.TermQuery</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.BooleanClause$Occur</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.util.Parameter</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.index.Term</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.RangeFilter</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.PrefixQuery</class-expression>
+</include>
+<include>
+<class-expression>org.apache.lucene.search.BooleanQuery$TooManyClauses</class-expression>
+</include>
+<include>
+<class-expression>org.alfresco.repo.search.impl.lucene.index.TransactionStatus</class-expression>
+</include>
+</instrumented-classes>
+<distributed-methods>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.insert(org.apache.lucene.document.Document, java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.insert(java.util.List, java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.delete(java.util.List, java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.delete(org.apache.lucene.index.Term, java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.delete(int, java.lang.String, java.lang.String)</method-expression>
+<method-expression>org.apache.lucene.index.IndexReader it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.getReader(java.lang.String)</method-expression>
+<method-expression>org.apache.lucene.index.IndexReader it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.getDeltaReader(java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.closeDeltaReader(java.lang.String, java.lang.String)</method-expression>
+<method-expression>org.apache.lucene.index.IndexWriter it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.getDeltaWriter(java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.closeDeltaWriter(java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.saveDelta(java.lang.String, java.lang.String)</method-expression>
+<method-expression>long it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.getDocCount(java.lang.String, java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.closeMainReader(java.lang.String)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.setStatus(java.lang.String, java.lang.String, org.alfresco.repo.search.impl.lucene.index.TransactionStatus)</method-expression>
+<method-expression>void it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.setPreparedState(java.lang.String, java.lang.String, java.util.Set, long, boolean)</method-expression>
+<method-expression>org.apache.lucene.index.IndexReader it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.IndexInfoProxyService.getMainIndexReferenceCountingReadOnlyIndexReader(java.lang.String, java.lang.String, java.util.Set, boolean)</method-expression>
+</distributed-methods>
+<locks>
+<autolock>
+<method-expression>* it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene...*.*(..)</method-expression>
+<lock-level>write</lock-level>
+</autolock>
+</locks>
+<roots>
+<root>
+<field-name>it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.RepositoryAwareLuceneBase.serviceTC</field-name>
+</root>
+</roots>
+</dso>

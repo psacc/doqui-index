@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
+
+<application>
+    <!-- @@server_version@@ -->
+
+	<display-name>ECMENGINE</display-name>
+	<description>Gestione Documentale</description>
+
+    <!--
+        MB: JBoss carica prima i JAR della directory LIB e poi i JAR di questo file
+            Per questa ragione, ponendo Lucene come modulo JAVA, il class loader
+            di JBoss carichera' prima Alfresco-repository e poi Lucene
+            Questo caricamento permette ad Alfresco di sovrascrivere la classe
+            FSDirectory di Lucene
+    -->
+  	<module><java>lib/lucene-core-2.1.0.jar</java></module>
+
+  	<!-- Modulo per lo startup -->
+
+  	<!-- JBoss: <ejb>ecmengine-startup.sar</ejb> -->
+
+  	@@startup_module@@
+
+	<module><ejb>foundation-beans.jar</ejb></module>
+	<module><ejb>publishing-beans.jar</ejb></module>
+	<module><ejb>massive.jar</ejb></module>
+
+	<!-- Inizio moduli opzionali -->
+
+	@@csi_module@@
+
+	@@pabr_module@@
+
+	@@security_module@@
+
+	<!-- Fine moduli opzionali -->
+
+</application>

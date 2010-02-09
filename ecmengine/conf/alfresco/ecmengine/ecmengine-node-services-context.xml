@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<!-- Beans pertinent to node persistence and services - DoQui customizations -->
+<beans>
+	<alias alias="dbNodeService" name="@@nodeServiceImpl@@DbNodeService" />
+	<bean id="nodeIndexer" parent="@@nodeServiceImpl@@AbstractNodeIndexer" init-method="init" />
+
+   	<bean id="mlAwareNodeService" class="org.alfresco.repo.service.StoreRedirectorProxyFactory">
+		<property name="proxyInterface" value="@@nodeServiceInterface@@" 	/>
+		<property name="defaultBinding" ref="dbNodeService" 				/>
+		<property name="redirectedProtocolBindings">
+			<map>
+				<entry key="workspace" 		value-ref="dbNodeService" 		/>
+				<entry key="versionStore" 	value-ref="versionNodeService" 	/>
+				<entry key="avm" 			value-ref="avmNodeService" 		/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Handles policy callbacks to ensure that node hierarchy gets indexed -->
+	<bean id="standardAbstractNodeIndexer" 
+		class="org.alfresco.repo.node.index.NodeIndexer" 
+   		abstract="true">
+		<property name="policyComponent" 	ref="policyComponent" 	/>
+		<property name="indexer" 			ref="indexerComponent" 	/>
+	</bean>
+
+	<!-- Handles policy callbacks to ensure that node hierarchy with splitted nodes gets 
+		indexed correctly -->
+	<bean id="splittingAbstractNodeIndexer" 
+   		class="it.doqui.index.ecmengine.business.personalization.splitting.index.SplittingNodeIndexer" 
+   		abstract="true">
+		<property name="policyComponent" 		ref="policyComponent" 			/>
+		<property name="indexer" 				ref="indexerComponent" 			/>
+		<property name="splittingNodeService" 	ref="splittingDbNodeService" 	/>
+	</bean>
+   
+	<!-- NodeService implemented to persist to Database.  Resource management enabled. -->
+	<bean id="standardDbNodeService"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces" 	value="org.alfresco.service.cmr.repository.NodeService"	/>
+		<property name="target" 			ref="dbNodeServiceImpl" 								/>
+		<property name="interceptorNames">
+			<list>
+				<value>sessionSizeResourceInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- NodeService implemented to persist to Database.  Resource management enabled. -->
+	<bean id="splittingDbNodeService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces"	value="it.doqui.index.ecmengine.business.personalization.splitting.SplittingNodeService" />
+		<property name="target" 			ref="splittingDbNodeServiceImpl" />
+		<property name="interceptorNames">
+			<list>
+				<value>sessionSizeResourceInterceptor</value>
+			</list>
+		</property>
+	</bean>
+  
+	<!-- Parallel implementation of NodeService with splitting support. - Doqui -->
+	<bean id="splittingDbNodeServiceImpl" 
+   		class="it.doqui.index.ecmengine.business.personalization.splitting.SplittingDbNodeServiceImpl" 
+   		init-method="init" >
+		<property name="dictionaryService" 	ref="dictionaryService"	/>
+		<property name="nodeDaoService"		ref="nodeDaoService"	/>
+		<property name="tenantService"		ref="tenantService"		/>
+		<property name="policyComponent"	ref="policyComponent"	/>
+		<property name="storeArchiveMap"	ref="storeArchiveMap"	/>
+		<property name="avmNodeService"		ref="avmNodeService"	/>
+		<property name="partsCount">
+			<value type="int">@@splitPartsCount@@</value>
+		</property>
+	</bean>
+</beans>

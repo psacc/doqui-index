@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wls="http://www.bea.com/ns/weblogic/90" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/j2ee_1_4.xsd http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-application.xsd">
+  
+  <wls:listener>
+    <wls:listener-class>it.doqui.index.ecmengine.business.startup.weblogic.EcmEngineStartupListener</wls:listener-class>
+  </wls:listener>
+  
+</wls:weblogic-application>

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+    <bean id="permissionServiceImpl" 
+    	class="@@permissionServiceImplClass@@">
+        <property name="nodeService">
+            <ref bean="nodeService" />
+        </property>
+        <property name="tenantService">
+            <ref bean="tenantService"/>
+        </property>
+        <property name="dictionaryService">
+            <ref bean="dictionaryService" />
+        </property>
+        <property name="permissionsDaoComponent">
+            <ref bean="permissionsDaoComponent" />
+        </property>
+        <property name="modelDAO">
+            <ref bean="permissionsModelDAO" />
+        </property>
+        <property name="authenticationComponent">
+            <ref bean="authenticationComponent" />
+        </property>
+        <property name="authorityService">
+            <ref bean="authorityService" />
+        </property>
+        <property name="accessCache">
+            <ref bean="permissionsAccessCache" />
+        </property>
+        <property name="policyComponent">
+            <ref bean="policyComponent" />
+        </property>
+        <!-- Dynamic authorites are evaluated in the context of a store/node etc -->
+        <!-- as opposed to being fixed like user name and groups.                -->
+        <!-- There are two dynamic authorities, the ower of a node and the owner -->
+        <!-- of a lock on a node.                                                -->
+        <property name="dynamicAuthorities">
+            <list>
+                <ref bean="ownerDynamicAuthority" />
+                <ref bean="lockOwnerDynamicAuthority" />
+                <ref bean="aooAdministratorDynamicAuthority" />
+            </list>
+        </property>
+    </bean>
+
+	<!-- DAO che implementa il check delle ACL mediante stored procedure -->
+    <bean id="aclCheckDao" class="it.doqui.index.ecmengine.business.personalization.security.acl.AclCheckDao">
+    	<property name="sessionFactory" ref="sessionFactory" />
+    	<property name="permissionService" ref="permissionServiceImpl" />
+    </bean>
+
+    <!-- ======================================== -->
+    <!-- Post method call application of security -->
+    <!-- ======================================== -->
+
+	<bean id="afterAcl" parent="@@afterAclEvaluator@@" />
+
+    <!-- Provider per la verifica delle ACL che supporta la verifica mediante stored procedure sui risultati delle query Lucene. -->
+
+    <bean id="afterAclStoredProc" class="it.doqui.index.ecmengine.business.personalization.security.acl.ACLEntryAfterInvocationProvider" 
+    	abstract="true" singleton="true"
+        lazy-init="default" autowire="no" dependency-check="default" >
+        <property name="permissionService">
+            <ref bean="permissionServiceImpl" />
+        </property>
+        <property name="namespacePrefixResolver">
+            <ref bean="namespaceService" />
+        </property>
+        <property name="nodeService">
+            <ref bean="nodeService" />
+        </property>
+        <property name="readersService">
+        	<ref bean="readersService" />
+        </property>
+        <property name="aclCheckDao">
+        	<ref bean="aclCheckDao" />
+        </property>
+        <property name="modelDao">
+            <ref bean="permissionsModelDAO" />
+        </property>
+        <property name="authenticationService">
+             <ref bean="authenticationService" />
+        </property>
+        <property name="maxPermissionCheckTimeMillis">
+            <value>${system.acl.maxPermissionCheckTimeMillis}</value>
+        </property>
+        <property name="maxPermissionChecks">
+            <value>${system.acl.maxPermissionChecks}</value>
+        </property>
+    </bean>
+
+    <bean id="afterAclStandard" class="org.alfresco.repo.security.permissions.impl.acegi.ACLEntryAfterInvocationProvider" 
+    	abstract="true" singleton="true"
+        lazy-init="default" autowire="no" dependency-check="default" >
+        <property name="permissionService">
+            <ref bean="permissionServiceImpl" />
+        </property>
+        <property name="namespacePrefixResolver">
+            <ref bean="namespaceService" />
+        </property>
+        <property name="nodeService">
+            <ref bean="nodeService" />
+        </property>
+        <property name="authenticationService">
+             <ref bean="authenticationService" />
+        </property>
+        <property name="maxPermissionCheckTimeMillis">
+            <value>${system.acl.maxPermissionCheckTimeMillis}</value>
+        </property>
+        <property name="maxPermissionChecks">
+            <value>${system.acl.maxPermissionChecks}</value>
+        </property>
+    </bean>
+
+    <!-- =========================== -->
+    <!-- Content Service Permissions -->
+    <!-- =========================== -->
+
+    <!-- Reading requires the permission to read content                                 -->
+    <!-- Writing required the permission to write conent                                 -->
+
+    <bean id="ContentService_security" class="net.sf.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor">
+        <property name="authenticationManager"><ref bean="authenticationManager"/></property>
+        <property name="accessDecisionManager"><ref bean="accessDecisionManager"/></property>
+        <property name="afterInvocationManager"><ref bean="afterInvocationManager"/></property>
+        <property name="objectDefinitionSource">
+            <value>
+               org.alfresco.service.cmr.repository.ContentService.getRawReader=ACL_METHOD.ROLE_ADMINISTRATOR
+               org.alfresco.service.cmr.repository.ContentService.getReader=ACL_NODE.0.sys:base.ReadContent
+               org.alfresco.service.cmr.repository.ContentService.getWriter=ACL_NODE.0.sys:base.WriteContent
+               org.alfresco.service.cmr.repository.ContentService.isTransformable=ACL_ALLOW
+               org.alfresco.service.cmr.repository.ContentService.getTransformer=ACL_ALLOW
+               org.alfresco.service.cmr.repository.ContentService.getImageTransformer=ACL_ALLOW
+               org.alfresco.service.cmr.repository.ContentService.transform=ACL_ALLOW
+               org.alfresco.service.cmr.repository.ContentService.getTempWriter=ACL_ALLOW
+               it.doqui.index.ecmengine.business.personalization.encryption.CryptoContentService.getEncryptingWriter=ACL_NODE.0.sys:base.WriteContent
+               it.doqui.index.ecmengine.business.personalization.encryption.CryptoContentService.getDecryptingReader=ACL_NODE.0.sys:base.ReadContent
+            </value>
+        </property>
+    </bean>
+</beans>

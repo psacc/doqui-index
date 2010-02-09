@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    '-//Hibernate/Hibernate Mapping DTD 3.0//EN' 
+    'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>
+
+<hibernate-mapping>
+	
+	<sql-query name="sp_has_permission">
+		<return-scalar column="node_id" type="long" />
+		SELECT "node_id" FROM TABLE(FNC_ecmengine_check_permission(:nodes, :authorities, :permissions))
+	</sql-query>
+	
+	<!-- Su Oracle l'identificativo della function e` stato accorciato -->
+	<sql-query name="sp_has_permission_mi">
+		<return-scalar column="node_id" type="long" />
+		SELECT "node_id" FROM TABLE(FNC_ecmengine_check_perm_mi(:nodes, :authorities, :permissions))
+	</sql-query>
+
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <!-- File format service -->
+
+	<bean id="fileformatService" class="it.doqui.index.fileformat.business.service.FileFormatServiceImpl" init-method="checkSignatureFile">
+		<constructor-arg value="${fileformat.config.file}"/>
+		<constructor-arg value="${fileformat.signature.file}"/>
+	</bean>
+	
+	<bean id="fileformatJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>
+				it.doqui.index.ecmengine.business.job.fileformat.FileFormatUpdateSignatureFileJob
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="fileformatService">
+					<ref bean="fileformatService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="fileformatJobTrigger"
+		class="org.alfresco.util.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="fileformatJobDetail" />
+		</property>
+		<property name="scheduler">
+			<ref bean="schedulerFactory" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/30 * * * ?</value>
+		</property>
+	</bean>
+
+</beans>

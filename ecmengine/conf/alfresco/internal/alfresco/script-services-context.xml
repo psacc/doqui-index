@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<bean id="scriptService" class="org.alfresco.repo.processor.ScriptServiceImpl">
+	    <property name="defaultScriptProcessor">
+            <value>javascript</value>
+        </property>
+        <property name="nodeService">
+            <ref bean="NodeService"/>
+        </property>
+    </bean>
+
+    <bean id="javaScriptProcessor" class="org.alfresco.repo.jscript.RhinoScriptProcessor" init-method="register">
+    	<property name="name">
+            <value>javascript</value>
+        </property>
+        <property name="extension">
+            <value>js</value>
+        </property>        
+        <property name="scriptService">
+            <ref bean="scriptService"/>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="storeUrl">
+            <value>${spaces.store}</value>
+        </property>
+        <property name="storePath">
+            <value>${spaces.company_home.childname}</value>
+        </property>
+    </bean>
+
+    <!--  Switch on debugger by setting log4j.logger.org.alfresco.repo.rhinodebugger to DEBUG -->
+    <!-- bean id="rhinoScriptDebugger" class="org.alfresco.repo.jscript.AlfrescoRhinoScriptDebugger" init-method="start"/ -->
+    
+    <!-- base config implementation that script extension beans extend from - for auto registration
+         as a global script with the ScriptService -->
+    <bean id="baseJavaScriptExtension" abstract="true" init-method="register">
+        <property name="processor">
+            <ref bean="javaScriptProcessor"/>
+        </property>
+    </bean>    
+    
+    <bean id="loggerScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.ScriptLogger">
+        <property name="extensionName">
+            <value>logger</value>
+        </property>
+    </bean>
+    
+    <bean id="utilsScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.ScriptUtils">
+        <property name="extensionName">
+            <value>utils</value>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+    
+    <bean id="actionsScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.Actions">
+        <property name="extensionName">
+            <value>actions</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+
+    <bean id="searchScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.Search">
+        <property name="extensionName">
+            <value>search</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="storeUrl">
+            <value>${spaces.store}</value>
+        </property>
+    </bean>
+
+    <bean id="classificationScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.Classification">
+        <property name="extensionName">
+            <value>classification</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="storeUrl">
+            <value>${spaces.store}</value>
+        </property>
+    </bean>
+
+    <bean id="peopleScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.People">
+        <property name="extensionName">
+            <value>people</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="authorityDAO">
+            <ref bean="authorityDAO"/>
+        </property>
+        <property name="authorityService">
+            <ref bean="AuthorityService"/>
+        </property>
+    </bean>
+
+    <bean id="sessionScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.Session">
+        <property name="extensionName">
+            <value>session</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+
+    <bean id="scriptBehaviour" abstract="true">
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+    
+    <bean id="avmScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.AVM">
+        <property name="extensionName">
+            <value>avm</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="nameMatcher">
+            <ref bean="globalPathExcluder"/>
+        </property>
+    </bean>
+    
+    <bean id="crossCopyScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.CrossRepositoryCopy">
+        <property name="extensionName">
+            <value>crossRepoCopy</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+    
+    <bean id="workflowScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.workflow.jscript.WorkflowManager">
+        <property name="extensionName">
+            <value>workflow</value>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+
+    <bean id="presenceScript" parent="baseJavaScriptExtension" class="org.alfresco.repo.jscript.Presence">
+        <property name="extensionName">
+            <value>presence</value>
+        </property>        
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+
+</beans>

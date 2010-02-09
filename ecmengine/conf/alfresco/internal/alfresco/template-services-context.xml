@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <bean id="templateService" class="org.alfresco.repo.processor.TemplateServiceImpl">
+        <property name="defaultTemplateEngine">
+            <value>freemarker</value>
+        </property>
+        <property name="nodeService">
+            <ref bean="NodeService"/>
+        </property>
+    </bean>
+    
+    <bean id="baseTemplateProcessor" abstract="true" init-method="register">
+        <property name="templateService">
+            <ref bean="templateService"/>
+        </property>     
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>  
+    </bean>
+    
+    <!-- The beans are not thread safe and therefore we create one per request -->
+    <bean id="freeMarkerProcessor" parent="baseTemplateProcessor" class="org.alfresco.repo.template.FreeMarkerProcessor">
+        <property name="name">
+            <value>freemarker</value>
+        </property>
+        <property name="extension">
+            <value>ftl</value>
+        </property>
+    </bean>
+    
+    <!-- base config implementation that template extension beans extend from - for auto registration
+         as a global template helper with the TemplateService -->
+    <bean id="baseTemplateImplementation" abstract="true" init-method="register">
+        <property name="processor">
+            <ref bean="freeMarkerProcessor"/>
+        </property>
+    </bean>
+    
+    <bean id="avmExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.AVM">
+        <property name="extensionName">
+            <value>avm</value>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="nameMatcher">
+            <ref bean="globalPathExcluder"/>
+        </property>
+    </bean>
+    
+    <bean id="sessionTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.Session">
+        <property name="extensionName">
+            <value>session</value>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+    
+    <bean id="classificationTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.Classification">
+        <property name="extensionName">
+            <value>classification</value>
+        </property>
+        <property name="storeUrl">
+            <value>${spaces.store}</value>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+    
+    <bean id="workflowTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.Workflow">
+        <property name="extensionName">
+            <value>workflow</value>
+        </property>
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+    
+    <bean id="hasAspectTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.HasAspectMethod">
+        <property name="extensionName">
+            <value>hasAspect</value>
+        </property>
+    </bean>
+    
+    <bean id="hasPermissionTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.HasPermissionMethod">
+        <property name="extensionName">
+            <value>hasPermission</value>
+        </property>
+    </bean>
+    
+    <bean id="messageTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.I18NMessageMethod">
+        <property name="extensionName">
+            <value>message</value>
+        </property>
+    </bean>
+    
+    <bean id="dateCompareTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.DateCompareMethod">
+        <property name="extensionName">
+            <value>dateCompare</value>
+        </property>
+    </bean>
+    
+    <bean id="incrementDateTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.DateIncrementMethod">
+        <property name="extensionName">
+            <value>incrementDate</value>
+        </property>
+    </bean>
+    
+    <bean id="xmlDateTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.ISO8601DateFormatMethod">
+        <property name="extensionName">
+            <value>xmldate</value>
+        </property>
+    </bean>
+    
+    <bean id="urlEncodeTemplateExtension" parent="baseTemplateImplementation" class="org.alfresco.repo.template.ISO8601DateFormatMethod">
+        <property name="extensionName">
+            <value>urlencode</value>
+        </property>
+    </bean>
+    
+</beans>

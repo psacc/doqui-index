@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<!-- Alias for default data source -->
+	<alias name="dataSource" alias="defaultDataSource" />
+
+    <!-- Datasource bean PRIMARY -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName">
+            <value>${db.driver}</value>
+        </property>
+        <property name="url">
+            <value>${db.url}</value>
+        </property>
+        <property name="username">
+            <value>${db.username}</value>
+        </property>
+        <property name="password">
+            <value>${db.password}</value>
+        </property>
+        <property name="initialSize" >
+            <value>${db.pool.initial}</value>
+        </property>
+        <property name="maxActive" >
+            <value>${db.pool.max}</value>
+        </property>
+        <property name="defaultAutoCommit" >
+            <value>false</value>
+        </property>
+        <property name="validationQuery" >
+        	<value>${db.validation.query}</value>
+        </property>
+        <property name="testOnBorrow">
+        	<value>true</value>
+        </property>
+    </bean>
+
+    <!-- ContentStore bean -->
+    <bean id="fileContentStoreDynamic"  class="it.doqui.index.ecmengine.business.personalization.multirepository.FileContentStoreDynamic"/>
+
+    <!-- ContentStore manager -->
+    <bean id="contentStoreManager"
+        class="it.doqui.index.ecmengine.business.personalization.multirepository.ContentStoreManager"
+        factory-method="getInstance">
+        <property name="contentStores">
+            <map>
+                <entry key="FILE">
+                    <ref bean="fileContentStoreDynamic"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- ContentStore definition -->
+    <bean id="fileContentStoreDynamicDefinition" class="it.doqui.index.ecmengine.business.personalization.multirepository.ContentStoreDefinition">
+        <property name="type">
+            <value>FILE</value>
+        </property>
+        <property name="protocol">
+            <value>file</value>
+        </property>
+        <property name="resource">
+            <value>${dir.contentstore.cas}</value>
+        </property>
+    </bean>
+
+	<bean id="primaryRepository" class="it.doqui.index.ecmengine.business.personalization.multirepository.Repository">
+		<property name="id" value="primary"/>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="contentRootLocation" value="${dir.contentstore}"/>
+		<property name="indexRootLocation" value="${dir.indexes}"/>
+		<property name="indexRecoveryMode" value="${index.recovery.mode}"/>
+		<property name="indexBackupLocation" value="${dir.indexes.backup}"/>
+		<property name="cacheConfigLocation" value="classpath:alfresco/ehcache-default.xml" />
+        <!--
+        MB: Lista dei bean di contentStoreDefinition di questo repository
+
+        Anche i tenant, all'atto della creazione, possono avere delle contentStoreDefinition,
+        che servono per discriminare il ContentStore da utilizzare a runtime, in base all'aspect
+        di storage
+        -->
+        <!--
+        <property name="contentStores">
+            <list>
+                <ref bean="fileContentStoreDynamicDefinition"/>
+            </list>
+        </property>
+        -->
+	</bean>
+
+	<bean id="repositoryManager"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.RepositoryManager"
+		factory-method="getInstance">
+		<property name="repositories">
+			<list>
+				<ref bean="primaryRepository"/>
+			</list>
+		</property>
+		<property name="defaultRepository" ref="primaryRepository"/>
+	</bean>
+</beans>

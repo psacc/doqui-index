@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+ 
+<beans>
+
+	<!-- Import repository definitions -->
+	<import resource="@@extensionProtocol@@:@@extensionPath@@/repository-definition.xml" />
+
+    <!-- overriding to point to custom properties -->
+	<bean id="repository-properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders">
+            <value>true</value>
+        </property>
+        <property name="locations">
+            <list>
+                <value>classpath:alfresco/repository.properties</value>
+                <value>classpath:alfresco/version.properties</value>
+                <value>classpath:alfresco/domain/transaction.properties</value>
+
+                <value>@@extensionProtocol@@:@@extensionPath@@/custom-data-location.properties</value>  
+                <value>@@extensionProtocol@@:@@extensionPath@@/custom-db-connection.properties</value>
+            </list>
+        </property>
+    </bean> 
+
+    <bean id="hibernateConfigProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:alfresco/domain/hibernate-cfg.properties</value>
+                <value>@@extensionProtocol@@:@@extensionPath@@/custom-hibernate-dialect.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Hibernate session factory -->
+    <bean id="sessionFactory" class="it.doqui.index.ecmengine.business.personalization.hibernate.RoutingLocalSessionFactoryBean" 
+    	parent="sessionFactoryBase">
+        <property name="dataSource">
+            <ref bean="defaultDataSource" />
+        </property>
+		<property name="repositoryManager" ref="repositoryManager"/>
+    </bean>
+
+	<bean id="fileContentStore" class="it.doqui.index.ecmengine.business.personalization.multirepository.RoutingFileContentStore">
+		<constructor-arg><ref bean="repositoryManager"/></constructor-arg>
+	</bean>
+
+	<!-- ==================================================== -->
+	<!-- EH Cache Manager to produce in-transaction EH Caches -->
+	<!--     Do not override or cluster                       -->
+	<!-- ==================================================== -->
+   
+	<bean name="transactionalEHCacheManager" 
+   		class="it.doqui.index.ecmengine.business.personalization.multirepository.RoutingEhCacheManagerFactoryBean" >
+		<property name="repositoryManager" ref="repositoryManager"/>
+	</bean>
+   
+	<!-- ============================================ -->
+	<!-- EH Cache Manager to produce shared EH Caches -->
+	<!-- ============================================ -->
+   
+	<bean name="internalEHCacheManager" 
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.RoutingInternalEhCacheManagerFactoryBean" 
+		depends-on="repositoryManager" />
+
+	<!-- avm orphan reaper component - Overrides definition in avm-services-context.xml -->
+	<bean id="orphanReaper" class="it.doqui.index.ecmengine.business.personalization.multirepository.OrphanReaper"
+		depends-on="AVMService" destroy-method="shutDown">
+      	<property name="repositoryManager" 	ref="repositoryManager"/>
+		<property name="activeBaseSleep" 	value="1000" />
+		<property name="batchSize" 			value="50" />
+		<property name="maxQueueLength" 	value="1000" />
+		<property name="transactionService"	ref="transactionService" />
+		<property name="sessionFactory" 	ref="sessionFactory" />
+	</bean> 
+
+</beans>

@@ -1,0 +1,3882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:EcmEngineBackoffice" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:EcmEngineBackoffice" xmlns:intf="urn:EcmEngineBackoffice" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it" xmlns:tns3="http://dto.webservices.client.ecmengine.index.doqui.it" xmlns:tns4="http://exception.webservices.client.ecmengine.index.doqui.it" xmlns:tns5="http://publishing.exception.webservices.client.ecmengine.index.doqui.it" xmlns:tns6="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it" xmlns:tns7="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Jul 16, 2009 (02:21:10 CEST)-->
+ <wsdl:types>
+  <schema targetNamespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="urn:EcmEngineBackoffice"/>
+   <import namespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Group">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SystemProperty">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="User">
+    <sequence>
+     <element name="homeFolderPath" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="organizationId" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="surname" nillable="true" type="xsd:string"/>
+     <element name="username" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AclListParams">
+    <sequence>
+     <element name="showInherited" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="IntegrityReport">
+    <sequence>
+     <element name="data" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DataArchive">
+    <sequence>
+     <element name="content" nillable="true" type="xsd:base64Binary"/>
+     <element name="format" nillable="true" type="xsd:string"/>
+     <element name="mappedContainerAssocTypePrefixedName" nillable="true" type="xsd:string"/>
+     <element name="mappedContainerNamePropertyPrefixedName" nillable="true" type="xsd:string"/>
+     <element name="mappedContainerTypePrefixedName" nillable="true" type="xsd:string"/>
+     <element name="mappedContentNamePropertyPrefixedName" nillable="true" type="xsd:string"/>
+     <element name="mappedContentTypePrefixedName" nillable="true" type="xsd:string"/>
+     <element name="parentContainerAssocTypePrefixedName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Repository">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ContentStoreDefinition">
+    <sequence>
+     <element name="protocol" nillable="true" type="xsd:string"/>
+     <element name="resource" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Tenant">
+    <sequence>
+     <element name="adminPassword" nillable="true" type="xsd:string"/>
+     <element name="contentStores" nillable="true" type="impl:ArrayOf_tns2_ContentStoreDefinition"/>
+     <element name="domain" nillable="true" type="xsd:string"/>
+     <element name="enabled" type="xsd:boolean"/>
+     <element name="rootContentStoreDir" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://dto.webservices.client.ecmengine.index.doqui.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="urn:EcmEngineBackoffice"/>
+   <import namespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="OperationContext">
+    <sequence>
+     <element name="fruitore" nillable="true" type="xsd:string"/>
+     <element name="nomeFisico" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="repository" nillable="true" type="xsd:string"/>
+     <element name="username" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Node">
+    <sequence>
+     <element name="uid" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AclRecord">
+    <sequence>
+     <element name="accessAllowed" type="xsd:boolean"/>
+     <element name="authority" nillable="true" type="xsd:string"/>
+     <element name="permission" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://exception.webservices.client.ecmengine.index.doqui.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="urn:EcmEngineBackoffice"/>
+   <import namespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="EcmEngineException">
+    <sequence>
+     <element name="errorMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="InvalidParameterException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="urn:EcmEngineBackoffice"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="InvalidCredentialsException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EcmEngineTransactionException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="PermissionDeniedException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NoDataExtractedException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NoSuchNodeException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="urn:EcmEngineBackoffice"/>
+   <import namespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="GroupCreateException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="GroupAlreadyExistsException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NoSuchGroupException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="UserCreateException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="UserAlreadyExistsException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="UserUpdateException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NoSuchUserException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="GroupEditException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="UserDeleteException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="GroupDeleteException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AclEditException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="TooManyNodesException">
+    <complexContent>
+     <extension base="tns4:EcmEngineException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="urn:EcmEngineBackoffice" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_tns2_SystemProperty">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:SystemProperty[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_AssociationMetadata">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:AssociationMetadata[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_ChildAssociationMetadata">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:ChildAssociationMetadata[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_PropertyMetadata">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:PropertyMetadata[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_AspectMetadata">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:AspectMetadata[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns2_User">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:User[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns3_AclRecord">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns3:AclRecord[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns2_IntegrityReport">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:IntegrityReport[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_TypeMetadata">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:TypeMetadata[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_ModelDescriptor">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:ModelDescriptor[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns2_Repository">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:Repository[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns2_Group">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:Group[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns2_ContentStoreDefinition">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:ContentStoreDefinition[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns2_Tenant">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns2:Tenant[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns7_CustomModel">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns7:CustomModel[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://model.backoffice.dto.webservices.client.ecmengine.index.doqui.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://backoffice.publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://backoffice.dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://dto.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="urn:EcmEngineBackoffice"/>
+   <import namespace="http://publishing.exception.webservices.client.ecmengine.index.doqui.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ModelDescriptor">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AssociationMetadata">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="modelDescriptor" nillable="true" type="tns7:ModelDescriptor"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ChildAssociationMetadata">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="modelDescriptor" nillable="true" type="tns7:ModelDescriptor"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PropertyMetadata">
+    <sequence>
+     <element name="dataType" nillable="true" type="xsd:string"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="mandatory" type="xsd:boolean"/>
+     <element name="modelDescriptor" nillable="true" type="tns7:ModelDescriptor"/>
+     <element name="modifiable" type="xsd:boolean"/>
+     <element name="multiValued" type="xsd:boolean"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AspectMetadata">
+    <sequence>
+     <element name="associations" nillable="true" type="impl:ArrayOf_tns7_AssociationMetadata"/>
+     <element name="childAssociations" nillable="true" type="impl:ArrayOf_tns7_ChildAssociationMetadata"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="modelDescriptor" nillable="true" type="tns7:ModelDescriptor"/>
+     <element name="parentPrefixedName" nillable="true" type="xsd:string"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="properties" nillable="true" type="impl:ArrayOf_tns7_PropertyMetadata"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TypeMetadata">
+    <sequence>
+     <element name="aspects" nillable="true" type="impl:ArrayOf_tns7_AspectMetadata"/>
+     <element name="associations" nillable="true" type="impl:ArrayOf_tns7_AssociationMetadata"/>
+     <element name="childAssociations" nillable="true" type="impl:ArrayOf_tns7_ChildAssociationMetadata"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="modelDescriptor" nillable="true" type="tns7:ModelDescriptor"/>
+     <element name="parentPrefixedName" nillable="true" type="xsd:string"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="properties" nillable="true" type="impl:ArrayOf_tns7_PropertyMetadata"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ModelMetadata">
+    <sequence>
+     <element name="aspects" nillable="true" type="impl:ArrayOf_tns7_AspectMetadata"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="types" nillable="true" type="impl:ArrayOf_tns7_TypeMetadata"/>
+    </sequence>
+   </complexType>
+   <complexType name="CustomModel">
+    <sequence>
+     <element name="active" type="xsd:boolean"/>
+     <element name="data" nillable="true" type="xsd:base64Binary"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="filename" nillable="true" type="xsd:string"/>
+     <element name="prefixedName" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getRepositoriesResponse">
+
+      <wsdl:part name="getRepositoriesReturn" type="impl:ArrayOf_tns2_Repository"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="impl:ArrayOf_tns3_AclRecord"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkRepositoryIntegrityRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="importDataArchiveResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="listUsersResponse">
+
+      <wsdl:part name="listUsersReturn" type="impl:ArrayOf_tns2_User"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UserDeleteException">
+
+      <wsdl:part name="fault" type="tns6:UserDeleteException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getModelDefinitionResponse">
+
+      <wsdl:part name="getModelDefinitionReturn" type="tns7:ModelMetadata"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UserAlreadyExistsException">
+
+      <wsdl:part name="fault" type="tns6:UserAlreadyExistsException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAclResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="resetAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="tns3:AclRecord"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllModelDescriptorsResponse">
+
+      <wsdl:part name="getAllModelDescriptorsReturn" type="impl:ArrayOf_tns7_ModelDescriptor"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="GroupAlreadyExistsException">
+
+      <wsdl:part name="fault" type="tns6:GroupAlreadyExistsException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="impl:ArrayOf_tns3_AclRecord"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="NoSuchUserException">
+
+      <wsdl:part name="fault" type="tns6:NoSuchUserException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUserToGroupRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns2:Group"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createUserRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserMetadataRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resetAclResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="listUsersRequest">
+
+      <wsdl:part name="in0" type="tns2:Group"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="GroupEditException">
+
+      <wsdl:part name="fault" type="tns6:GroupEditException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserPasswordResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="deployCustomModelResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidCredentialsException">
+
+      <wsdl:part name="fault" type="tns5:InvalidCredentialsException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listGroupsRequest">
+
+      <wsdl:part name="in0" type="tns2:Group"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTypeDefinitionRequest">
+
+      <wsdl:part name="in0" type="tns7:ModelDescriptor"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="impl:ArrayOf_tns3_AclRecord"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkRepositoryIntegrityResponse">
+
+      <wsdl:part name="checkRepositoryIntegrityReturn" type="impl:ArrayOf_tns2_IntegrityReport"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listAllGroupsResponse">
+
+      <wsdl:part name="listAllGroupsReturn" type="impl:ArrayOf_tns2_Group"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="undeployCustomModelResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="getTenantResponse">
+
+      <wsdl:part name="getTenantReturn" type="tns2:Tenant"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteGroupResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="listAllUsersResponse">
+
+      <wsdl:part name="listAllUsersReturn" type="impl:ArrayOf_tns2_User"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="NoDataExtractedException">
+
+      <wsdl:part name="fault" type="tns5:NoDataExtractedException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="enableTenantResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="setInheritsAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="xsd:boolean"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AclEditException">
+
+      <wsdl:part name="fault" type="tns6:AclEditException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteGroupRequest">
+
+      <wsdl:part name="in0" type="tns2:Group"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTenantResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="updateAclResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllTenantsResponse">
+
+      <wsdl:part name="getAllTenantsReturn" type="impl:ArrayOf_tns2_Tenant"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesResponse">
+
+      <wsdl:part name="testResourcesReturn" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="tns2:AclListParams"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deactivateCustomModelRequest">
+
+      <wsdl:part name="in0" type="tns7:CustomModel"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deployCustomModelRequest">
+
+      <wsdl:part name="in0" type="tns7:CustomModel"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tenantDeleteResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="getModelDefinitionRequest">
+
+      <wsdl:part name="in0" type="tns7:ModelDescriptor"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTypeDefinitionResponse">
+
+      <wsdl:part name="getTypeDefinitionReturn" type="tns7:TypeMetadata"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tenantDeleteRequest">
+
+      <wsdl:part name="in0" type="tns2:Tenant"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deactivateCustomModelResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="getSystemPropertiesResponse">
+
+      <wsdl:part name="getSystemPropertiesReturn" type="impl:ArrayOf_tns2_SystemProperty"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createGroupResponse">
+
+      <wsdl:part name="createGroupReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTenantRequest">
+
+      <wsdl:part name="in0" type="tns2:Tenant"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSystemPropertiesRequest">
+
+      <wsdl:part name="in0" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRepositoriesRequest">
+
+      <wsdl:part name="in0" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllTenantsRequest">
+
+      <wsdl:part name="in0" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="importDataArchiveRequest">
+
+      <wsdl:part name="in0" type="tns2:DataArchive"/>
+
+      <wsdl:part name="in1" type="tns3:Node"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="disableTenantRequest">
+
+      <wsdl:part name="in0" type="tns2:Tenant"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="GroupDeleteException">
+
+      <wsdl:part name="fault" type="tns6:GroupDeleteException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setInheritsAclResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="UserUpdateException">
+
+      <wsdl:part name="fault" type="tns6:UserUpdateException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllModelDescriptorsRequest">
+
+      <wsdl:part name="in0" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="createGroupRequest">
+
+      <wsdl:part name="in0" type="tns2:Group"/>
+
+      <wsdl:part name="in1" type="tns2:Group"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tenantExistsResponse">
+
+      <wsdl:part name="tenantExistsReturn" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTenantRequest">
+
+      <wsdl:part name="in0" type="tns2:Tenant"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCustomModelsRequest">
+
+      <wsdl:part name="in0" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="activateCustomModelResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserPasswordRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listAllUsersRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeUserFromGroupRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns2:Group"/>
+
+      <wsdl:part name="in2" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="undeployCustomModelRequest">
+
+      <wsdl:part name="in0" type="tns7:CustomModel"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="retrieveUserMetadataResponse">
+
+      <wsdl:part name="retrieveUserMetadataReturn" type="tns2:User"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="TooManyNodesException">
+
+      <wsdl:part name="fault" type="tns6:TooManyNodesException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="disableTenantResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="isInheritsAclResponse">
+
+      <wsdl:part name="isInheritsAclReturn" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="NoSuchNodeException">
+
+      <wsdl:part name="fault" type="tns5:NoSuchNodeException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeAclResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="createUserResponse">
+
+      <wsdl:part name="createUserReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EcmEngineException">
+
+      <wsdl:part name="fault" type="tns4:EcmEngineException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tenantExistsRequest">
+
+      <wsdl:part name="in0" type="tns2:Tenant"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="retrieveUserMetadataRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCustomModelsResponse">
+
+      <wsdl:part name="getAllCustomModelsReturn" type="impl:ArrayOf_tns7_CustomModel"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserMetadataResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="removeUserFromGroupResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="PermissionDeniedException">
+
+      <wsdl:part name="fault" type="tns5:PermissionDeniedException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserRequest">
+
+      <wsdl:part name="in0" type="tns2:User"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterException">
+
+      <wsdl:part name="fault" type="tns4:InvalidParameterException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="GroupCreateException">
+
+      <wsdl:part name="fault" type="tns6:GroupCreateException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listAclResponse">
+
+      <wsdl:part name="listAclReturn" type="impl:ArrayOf_tns3_AclRecord"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listGroupsResponse">
+
+      <wsdl:part name="listGroupsReturn" type="impl:ArrayOf_tns2_Group"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="NoSuchGroupException">
+
+      <wsdl:part name="fault" type="tns6:NoSuchGroupException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isInheritsAclRequest">
+
+      <wsdl:part name="in0" type="tns3:Node"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="activateCustomModelRequest">
+
+      <wsdl:part name="in0" type="tns7:CustomModel"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="enableTenantRequest">
+
+      <wsdl:part name="in0" type="tns2:Tenant"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listAllGroupsRequest">
+
+      <wsdl:part name="in0" type="tns2:Group"/>
+
+      <wsdl:part name="in1" type="tns3:OperationContext"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UserCreateException">
+
+      <wsdl:part name="fault" type="tns6:UserCreateException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUserToGroupResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="EcmEngineTransactionException">
+
+      <wsdl:part name="fault" type="tns5:EcmEngineTransactionException"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EcmEngineWebServiceBackofficeDelegate">
+
+      <wsdl:operation name="createGroup" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:createGroupRequest" name="createGroupRequest"/>
+
+         <wsdl:output message="impl:createGroupResponse" name="createGroupResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchGroupException" name="NoSuchGroupException"/>
+
+         <wsdl:fault message="impl:GroupCreateException" name="GroupCreateException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:GroupAlreadyExistsException" name="GroupAlreadyExistsException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSystemProperties" parameterOrder="in0">
+
+         <wsdl:input message="impl:getSystemPropertiesRequest" name="getSystemPropertiesRequest"/>
+
+         <wsdl:output message="impl:getSystemPropertiesResponse" name="getSystemPropertiesResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTypeDefinition" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:getTypeDefinitionRequest" name="getTypeDefinitionRequest"/>
+
+         <wsdl:output message="impl:getTypeDefinitionResponse" name="getTypeDefinitionResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testResources">
+
+         <wsdl:input message="impl:testResourcesRequest" name="testResourcesRequest"/>
+
+         <wsdl:output message="impl:testResourcesResponse" name="testResourcesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createUser" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:createUserRequest" name="createUserRequest"/>
+
+         <wsdl:output message="impl:createUserResponse" name="createUserResponse"/>
+
+         <wsdl:fault message="impl:UserAlreadyExistsException" name="UserAlreadyExistsException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:UserCreateException" name="UserCreateException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUserMetadata" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:updateUserMetadataRequest" name="updateUserMetadataRequest"/>
+
+         <wsdl:output message="impl:updateUserMetadataResponse" name="updateUserMetadataResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:UserUpdateException" name="UserUpdateException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:NoSuchUserException" name="NoSuchUserException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listAllUsers" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:listAllUsersRequest" name="listAllUsersRequest"/>
+
+         <wsdl:output message="impl:listAllUsersResponse" name="listAllUsersResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="retrieveUserMetadata" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:retrieveUserMetadataRequest" name="retrieveUserMetadataRequest"/>
+
+         <wsdl:output message="impl:retrieveUserMetadataResponse" name="retrieveUserMetadataResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addUserToGroup" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:addUserToGroupRequest" name="addUserToGroupRequest"/>
+
+         <wsdl:output message="impl:addUserToGroupResponse" name="addUserToGroupResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:GroupEditException" name="GroupEditException"/>
+
+         <wsdl:fault message="impl:NoSuchGroupException" name="NoSuchGroupException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:NoSuchUserException" name="NoSuchUserException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeUserFromGroup" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:removeUserFromGroupRequest" name="removeUserFromGroupRequest"/>
+
+         <wsdl:output message="impl:removeUserFromGroupResponse" name="removeUserFromGroupResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:GroupEditException" name="GroupEditException"/>
+
+         <wsdl:fault message="impl:NoSuchGroupException" name="NoSuchGroupException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:NoSuchUserException" name="NoSuchUserException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listUsers" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:listUsersRequest" name="listUsersRequest"/>
+
+         <wsdl:output message="impl:listUsersResponse" name="listUsersResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchGroupException" name="NoSuchGroupException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUserPassword" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:updateUserPasswordRequest" name="updateUserPasswordRequest"/>
+
+         <wsdl:output message="impl:updateUserPasswordResponse" name="updateUserPasswordResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:UserUpdateException" name="UserUpdateException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:NoSuchUserException" name="NoSuchUserException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUser" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:deleteUserRequest" name="deleteUserRequest"/>
+
+         <wsdl:output message="impl:deleteUserResponse" name="deleteUserResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:UserDeleteException" name="UserDeleteException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:NoSuchUserException" name="NoSuchUserException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroup" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:deleteGroupRequest" name="deleteGroupRequest"/>
+
+         <wsdl:output message="impl:deleteGroupResponse" name="deleteGroupResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:GroupDeleteException" name="GroupDeleteException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchGroupException" name="NoSuchGroupException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addAcl" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:addAclRequest" name="addAclRequest"/>
+
+         <wsdl:output message="impl:addAclResponse" name="addAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAcl" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:removeAclRequest" name="removeAclRequest"/>
+
+         <wsdl:output message="impl:removeAclResponse" name="removeAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateAcl" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:updateAclRequest" name="updateAclRequest"/>
+
+         <wsdl:output message="impl:updateAclResponse" name="updateAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listAcl" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:listAclRequest" name="listAclRequest"/>
+
+         <wsdl:output message="impl:listAclResponse" name="listAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setInheritsAcl" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:setInheritsAclRequest" name="setInheritsAclRequest"/>
+
+         <wsdl:output message="impl:setInheritsAclResponse" name="setInheritsAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isInheritsAcl" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:isInheritsAclRequest" name="isInheritsAclRequest"/>
+
+         <wsdl:output message="impl:isInheritsAclResponse" name="isInheritsAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resetAcl" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:resetAclRequest" name="resetAclRequest"/>
+
+         <wsdl:output message="impl:resetAclResponse" name="resetAclResponse"/>
+
+         <wsdl:fault message="impl:AclEditException" name="AclEditException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkRepositoryIntegrity" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:checkRepositoryIntegrityRequest" name="checkRepositoryIntegrityRequest"/>
+
+         <wsdl:output message="impl:checkRepositoryIntegrityResponse" name="checkRepositoryIntegrityResponse"/>
+
+         <wsdl:fault message="impl:TooManyNodesException" name="TooManyNodesException"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="importDataArchive" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:importDataArchiveRequest" name="importDataArchiveRequest"/>
+
+         <wsdl:output message="impl:importDataArchiveResponse" name="importDataArchiveResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchNodeException" name="NoSuchNodeException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getModelDefinition" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:getModelDefinitionRequest" name="getModelDefinitionRequest"/>
+
+         <wsdl:output message="impl:getModelDefinitionResponse" name="getModelDefinitionResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllModelDescriptors" parameterOrder="in0">
+
+         <wsdl:input message="impl:getAllModelDescriptorsRequest" name="getAllModelDescriptorsRequest"/>
+
+         <wsdl:output message="impl:getAllModelDescriptorsResponse" name="getAllModelDescriptorsResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRepositories" parameterOrder="in0">
+
+         <wsdl:input message="impl:getRepositoriesRequest" name="getRepositoriesRequest"/>
+
+         <wsdl:output message="impl:getRepositoriesResponse" name="getRepositoriesResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listGroups" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:listGroupsRequest" name="listGroupsRequest"/>
+
+         <wsdl:output message="impl:listGroupsResponse" name="listGroupsResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:NoSuchGroupException" name="NoSuchGroupException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listAllGroups" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:listAllGroupsRequest" name="listAllGroupsRequest"/>
+
+         <wsdl:output message="impl:listAllGroupsResponse" name="listAllGroupsResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTenant" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:createTenantRequest" name="createTenantRequest"/>
+
+         <wsdl:output message="impl:createTenantResponse" name="createTenantResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="enableTenant" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:enableTenantRequest" name="enableTenantRequest"/>
+
+         <wsdl:output message="impl:enableTenantResponse" name="enableTenantResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="disableTenant" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:disableTenantRequest" name="disableTenantRequest"/>
+
+         <wsdl:output message="impl:disableTenantResponse" name="disableTenantResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTenants" parameterOrder="in0">
+
+         <wsdl:input message="impl:getAllTenantsRequest" name="getAllTenantsRequest"/>
+
+         <wsdl:output message="impl:getAllTenantsResponse" name="getAllTenantsResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTenant" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:getTenantRequest" name="getTenantRequest"/>
+
+         <wsdl:output message="impl:getTenantResponse" name="getTenantResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tenantExists" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:tenantExistsRequest" name="tenantExistsRequest"/>
+
+         <wsdl:output message="impl:tenantExistsResponse" name="tenantExistsResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tenantDelete" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:tenantDeleteRequest" name="tenantDeleteRequest"/>
+
+         <wsdl:output message="impl:tenantDeleteResponse" name="tenantDeleteResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCustomModels" parameterOrder="in0">
+
+         <wsdl:input message="impl:getAllCustomModelsRequest" name="getAllCustomModelsRequest"/>
+
+         <wsdl:output message="impl:getAllCustomModelsResponse" name="getAllCustomModelsResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deployCustomModel" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:deployCustomModelRequest" name="deployCustomModelRequest"/>
+
+         <wsdl:output message="impl:deployCustomModelResponse" name="deployCustomModelResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="undeployCustomModel" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:undeployCustomModelRequest" name="undeployCustomModelRequest"/>
+
+         <wsdl:output message="impl:undeployCustomModelResponse" name="undeployCustomModelResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:NoDataExtractedException" name="NoDataExtractedException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="activateCustomModel" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:activateCustomModelRequest" name="activateCustomModelRequest"/>
+
+         <wsdl:output message="impl:activateCustomModelResponse" name="activateCustomModelResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deactivateCustomModel" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:deactivateCustomModelRequest" name="deactivateCustomModelRequest"/>
+
+         <wsdl:output message="impl:deactivateCustomModelResponse" name="deactivateCustomModelResponse"/>
+
+         <wsdl:fault message="impl:InvalidCredentialsException" name="InvalidCredentialsException"/>
+
+         <wsdl:fault message="impl:EcmEngineTransactionException" name="EcmEngineTransactionException"/>
+
+         <wsdl:fault message="impl:EcmEngineException" name="EcmEngineException"/>
+
+         <wsdl:fault message="impl:PermissionDeniedException" name="PermissionDeniedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EcmEngineBackofficeSoapBinding" type="impl:EcmEngineWebServiceBackofficeDelegate">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchGroupException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchGroupException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="GroupCreateException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="GroupCreateException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="GroupAlreadyExistsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="GroupAlreadyExistsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSystemProperties">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSystemPropertiesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSystemPropertiesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTypeDefinition">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTypeDefinitionRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTypeDefinitionResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testResources">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testResourcesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResourcesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createUserRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createUserResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="UserAlreadyExistsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="UserAlreadyExistsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UserCreateException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="UserCreateException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUserMetadata">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateUserMetadataRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateUserMetadataResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UserUpdateException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="UserUpdateException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchUserException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchUserException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listAllUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listAllUsersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listAllUsersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="retrieveUserMetadata">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="retrieveUserMetadataRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="retrieveUserMetadataResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addUserToGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addUserToGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addUserToGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="GroupEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="GroupEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchGroupException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchGroupException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchUserException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchUserException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeUserFromGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeUserFromGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeUserFromGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="GroupEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="GroupEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchGroupException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchGroupException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchUserException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchUserException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listUsersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listUsersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchGroupException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchGroupException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUserPassword">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateUserPasswordRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateUserPasswordResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UserUpdateException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="UserUpdateException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchUserException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchUserException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteUserRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteUserResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UserDeleteException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="UserDeleteException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchUserException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchUserException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="GroupDeleteException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="GroupDeleteException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchGroupException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchGroupException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setInheritsAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setInheritsAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setInheritsAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isInheritsAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isInheritsAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isInheritsAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resetAcl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="resetAclRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="resetAclResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AclEditException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AclEditException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkRepositoryIntegrity">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkRepositoryIntegrityRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkRepositoryIntegrityResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="TooManyNodesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="TooManyNodesException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="importDataArchive">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="importDataArchiveRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="importDataArchiveResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchNodeException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchNodeException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getModelDefinition">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getModelDefinitionRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getModelDefinitionResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllModelDescriptors">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllModelDescriptorsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllModelDescriptorsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRepositories">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRepositoriesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRepositoriesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listGroups">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listGroupsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listGroupsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoSuchGroupException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoSuchGroupException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listAllGroups">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listAllGroupsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listAllGroupsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTenant">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTenantRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTenantResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="enableTenant">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="enableTenantRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="enableTenantResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="disableTenant">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="disableTenantRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="disableTenantResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTenants">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllTenantsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllTenantsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTenant">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTenantRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTenantResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tenantExists">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tenantExistsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tenantExistsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tenantDelete">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tenantDeleteRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tenantDeleteResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCustomModels">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllCustomModelsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllCustomModelsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deployCustomModel">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deployCustomModelRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deployCustomModelResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="undeployCustomModel">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="undeployCustomModelRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="undeployCustomModelResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoDataExtractedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoDataExtractedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="activateCustomModel">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="activateCustomModelRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="activateCustomModelResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deactivateCustomModel">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deactivateCustomModelRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deactivateCustomModelResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidCredentialsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidCredentialsException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineTransactionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineTransactionException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EcmEngineException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="EcmEngineException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="PermissionDeniedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="PermissionDeniedException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="urn:EcmEngineBackoffice" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EcmEngineWebServiceBackofficeDelegateService">
+
+      <wsdl:port binding="impl:EcmEngineBackofficeSoapBinding" name="EcmEngineBackoffice">
+
+         <wsdlsoap:address location="http://localhost:8080/ecmengine/services/EcmEngineBackoffice"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

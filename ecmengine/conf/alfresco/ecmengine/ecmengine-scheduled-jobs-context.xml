@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<!-- begin job attivazione custom model-->
+	<bean id="customModelActivationJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>
+				it.doqui.index.ecmengine.business.job.model.CustomModelActivationJob
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="repoAdminService">
+					<ref bean="repoAdminService" />
+				</entry>
+				<entry key="nodeService">
+					<ref bean="nodeService" />
+				</entry>
+				<entry key="searchService">
+					<ref bean="searchService" />
+				</entry>
+				<entry key="transactionService">
+					<ref bean="transactionService" />
+				</entry>
+				<entry key="namespaceService">
+					<ref bean="namespaceService" />
+				</entry>
+				<entry key="tenantAdminService">
+					<ref bean="tenantAdminService" />
+				</entry>
+				<entry key="customModelsRepositoryLocation">
+					<ref bean="customModelsRepositoryLocation" />
+				</entry>
+				<entry key="dictionaryModelType">
+					<ref bean="dictionaryModelType" />
+				</entry>
+				<entry key="ecmengineJobManager">
+					<ref bean="ecmengineJobManager" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="customModelActivationTrigger"
+		class="org.alfresco.util.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="customModelActivationJobDetail" />
+		</property>
+		<property name="scheduler">
+			<ref bean="schedulerFactory" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/1 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end job attivazione custom model -->
+
+</beans>

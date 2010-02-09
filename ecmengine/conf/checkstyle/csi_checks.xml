@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+           Checkstyle-Configuration: csi_checks
+
+  Description:
+  Configurazione usata per la generazione del report di CheckStyle
+
+-->
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+    <property name="severity" value="warning"/>
+    <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+        <module name="JavadocType">
+            <property name="severity" value="info"/>
+            <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocVariable">
+            <property name="severity" value="info"/>
+            <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocStyle">
+            <property name="severity" value="info"/>
+            <property name="scope" value="public"/>
+            <property name="checkEmptyJavadoc" value="true"/>
+        </module>
+        <module name="ConstantName">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="LocalFinalVariableName">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="LocalVariableName">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="MemberName">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="MethodName">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="PackageName">
+            <property name="severity" value="error"/>
+            <property name="format" value="^[a-z]+(\.[a-z]*)*$"/>
+        </module>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName">
+            <property name="severity" value="error"/>
+            <property name="format" value="^[A-Z][a-zA-Z]*$"/>
+        </module>
+        <module name="AvoidStarImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+        <module name="FileLength">
+            <property name="severity" value="info"/>
+        </module>
+        <module name="LineLength">
+            <property name="severity" value="info"/>
+            <property name="max" value="120"/>
+        </module>
+        <module name="MethodLength">
+            <property name="max" value="100"/>
+            <property name="countEmpty" value="false"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="severity" value="info"/>
+        </module>
+        <module name="RedundantModifier">
+            <property name="severity" value="info"/>
+        </module>
+        <module name="DoubleCheckedLocking">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="InnerAssignment"/>
+        <module name="MagicNumber"/>
+        <module name="MissingSwitchDefault"/>
+        <module name="DesignForExtension"/>
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="TodoComment"/>
+        <module name="CovariantEquals">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="IllegalCatch"/>
+        <module name="IllegalThrows"/>
+        <module name="ModifiedControlVariable"/>
+        <module name="PackageDeclaration">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="RequireThis">
+            <property name="checkMethods" value="false"/>
+        </module>
+        <module name="StringLiteralEquality">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="SuperClone"/>
+        <module name="SuperFinalize"/>
+        <module name="BooleanExpressionComplexity"/>
+        <module name="ClassDataAbstractionCoupling"/>
+        <module name="ClassFanOutComplexity"/>
+        <module name="CyclomaticComplexity">
+            <property name="max" value="20"/>
+        </module>
+        <module name="NPathComplexity"/>
+        <module name="JavadocMethod">
+            <property name="severity" value="info"/>
+            <property name="scope" value="public"/>
+        </module>
+        <module name="RedundantThrows">
+            <property name="severity" value="info"/>
+        </module>
+        <module name="FallThrough"/>
+        <module name="FinalLocalVariable">
+            <property name="severity" value="info"/>
+        </module>
+        <module name="HiddenField"/>
+        <module name="NestedIfDepth">
+            <property name="severity" value="info"/>
+            <property name="max" value="3"/>
+        </module>
+        <module name="NestedTryDepth">
+            <property name="severity" value="info"/>
+            <property name="max" value="2"/>
+        </module>
+        <module name="ReturnCount">
+            <property name="severity" value="info"/>
+            <property name="max" value="3"/>
+        </module>
+    </module>
+    <module name="PackageHtml">
+        <property name="severity" value="info"/>
+    </module>
+</module>

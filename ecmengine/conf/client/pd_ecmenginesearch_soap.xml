@@ -1,0 +1,180 @@
+<porta-delegata name="pd_ecmenginesearch">
+	<services>
+		<service name="EcmEngineSearch"
+		         public-interface-class="it.doqui.index.ecmengine.interfacecsi.search.EcmEngineSearchInterface">
+			<operations>
+			    <operation name="getAssociations" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="assocType" type="java.lang.String" />
+						<param name="maxResults" type="int" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultAssociation[]" />
+				</operation>
+				<operation name="nodeExists" type="synch-call">
+					<param-list>
+						<param name="xpath" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="java.lang.String" />
+				</operation>
+				<operation name="luceneSearch" type="synch-call">
+					<param-list>
+						<param name="lucene" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.SearchResponse" />
+				</operation>
+				<operation name="xpathSearch" type="synch-call">
+					<param-list>
+						<param name="xpath" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.SearchResponse" />
+				</operation>
+				<operation name="genericGlobalSearch" type="synch-call">
+					<param-list>
+						<param name="params" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.SearchResponse" />
+				</operation>
+				<operation name="listDeletedNodes" type="synch-call">
+					<param-list>
+						<param name="params" type="it.doqui.index.ecmengine.dto.engine.search.ArchiveParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.SearchResponse" />
+				</operation>
+				<operation name="getUid" type="synch-call">
+					<param-list>
+						<param name="xpath" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="getPaths" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Path[]" />
+				</operation>
+				<operation name="getTotalResults" type="synch-call">
+					<param-list>
+						<param name="xpath" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="int" />
+				</operation>
+				<operation name="getTotalResultsLucene" type="synch-call">
+					<param-list>
+						<param name="lucene" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="int" />
+				</operation>
+				<operation name="ricercaAudit" type="synch-call">
+					<param-list>
+						<param name="params" type="it.doqui.index.ecmengine.dto.engine.audit.AuditSearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.audit.OperazioneAudit[]" />
+				</operation>
+				<operation name="luceneSearchNoMetadata" type="synch-call">
+					<param-list>
+						<param name="lucene" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.NodeResponse" />
+				</operation>
+				<operation name="xpathSearchNoMetadata" type="synch-call">
+					<param-list>
+						<param name="xpath" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.NodeResponse" />
+				</operation>
+				<operation name="genericGlobalSearchNoMetadata" type="synch-call">
+					<param-list>
+						<param name="params" type="it.doqui.index.ecmengine.dto.engine.search.SearchParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.NodeResponse" />
+				</operation>
+				<operation name="listDeletedNodesNoMetadata" type="synch-call">
+					<param-list>
+						<param name="params" type="it.doqui.index.ecmengine.dto.engine.NodeArchiveParams" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.NodeResponse" />
+				</operation>
+				<operation name="selectNodes" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="parameterAggregate" type="it.doqui.index.ecmengine.dto.engine.search.SearchParamsAggregate" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.NodeResponse" />
+				</operation>
+				<operation name="getCategories" type="synch-call">
+					<param-list>
+						<param name="category" type="it.doqui.index.ecmengine.dto.engine.management.Category" />
+						<param name="depth" type="java.lang.String" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultAssociation[]" />
+				</operation>
+				<operation name="getCategoryChildren" type="synch-call">
+					<param-list>
+						<param name="categoryNode" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="mode" type="java.lang.String" />
+						<param name="depth" type="java.lang.String" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultAssociation[]" />
+				</operation>
+				<operation name="getClassificationAspects" type="synch-call">
+					<param-list>
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultAspect[]" />
+				</operation>
+				<operation name="getClassifications" type="synch-call">
+					<param-list>
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultAssociation[]" />
+				</operation>
+				<operation name="getRootCategories" type="synch-call">
+					<param-list>
+						<param name="category" type="it.doqui.index.ecmengine.dto.engine.management.Category" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultAssociation[]" />
+				</operation>
+				<operation name="getTopCategories" type="synch-call">
+					<param-list>
+						<param name="category" type="it.doqui.index.ecmengine.dto.engine.management.Category" />
+						<param name="count" type="int" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.TopCategory[]" />
+				</operation>
+			</operations>
+		</service>
+	</services>
+	<config>
+		<url-pa></url-pa>
+		<pluggable-pd-list
+			chooser-class="it.csi.csi.porte.FixedDelegateChooser">
+			<pluggable-pd name="pa_ecmenginesearch_soap"
+				class="it.csi.csi.porte.soap.apache.PortaDelegataSoap"
+				url-pa="http://@@url_soap@@/servlet/rpcrouter">
+				<properties />
+			</pluggable-pd>
+		</pluggable-pd-list>
+		<queue-manager url="" />
+	</config>
+</porta-delegata>

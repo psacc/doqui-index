@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Enterprise-Bean: true
+Class-Path: lib/ lib/csi-core-1.4.5.jar lib/csi-ejb-1.4.5.jar lib/csi-rmi-1.4.5.jar lib/csi-stadapter-1.4.5.jar lib/csi-tools-1.4.5.jar lib/spring.jar

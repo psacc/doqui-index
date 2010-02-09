@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<!-- references to XML configurations -->
+<beans>
+
+    <import resource="classpath:alfresco/cache-context.xml" />
+    <import resource="classpath:alfresco/st-context.xml"/>
+    <import resource="classpath*:alfresco/extension/mt/mt-context.xml"/>
+    <import resource="classpath:alfresco/core-services-context.xml" />
+    <import resource="classpath:alfresco/public-services-context.xml" />
+    <import resource="classpath:alfresco/model-specific-services-context.xml" />
+    <import resource="classpath:alfresco/action-services-context.xml" />
+    <import resource="classpath:alfresco/rule-services-context.xml" />
+    <import resource="classpath:alfresco/node-services-context.xml" />
+    <import resource="classpath:alfresco/scheduled-jobs-context.xml" />
+    <import resource="classpath:alfresco/network-protocol-context.xml" />
+    <!-- DISABLED: import resource="classpath:alfresco/emailserver/email-service-context.xml" / -->
+    <import resource="classpath:alfresco/content-services-context.xml" />
+    <import resource="classpath*:alfresco/extension/mt/mt-admin-context.xml"/>
+    <import resource="classpath*:alfresco/extension/mt/mt-contentstore-context.xml"/>
+    <import resource="classpath:alfresco/hibernate-context.xml" />
+    <import resource="classpath:alfresco/ownable-services-context.xml" />
+    <import resource="classpath:alfresco/template-services-context.xml" />
+    <import resource="classpath:alfresco/script-services-context.xml" />
+    <import resource="classpath:alfresco/index-recovery-context.xml" />
+    <import resource="classpath:alfresco/authority-services-context.xml" />
+    <import resource="classpath:alfresco/authentication-services-context.xml" />
+    <import resource="classpath:alfresco/usage-services-context.xml" />
+    <import resource="classpath:alfresco/policy-context.xml" />
+    <import resource="classpath:alfresco/import-export-context.xml" />
+   	<!-- bootstrap-context.xml contains DoQui-specific customization -->
+	<import resource="classpath:alfresco/bootstrap-context.xml" />
+    <import resource="classpath:alfresco/repo-admin-context.xml"/>
+    <import resource="classpath:alfresco/workflow-context.xml" />
+    <import resource="classpath:alfresco/jcr-api-context.xml" />
+    <import resource="classpath:alfresco/avm-services-context.xml" />
+    <import resource="classpath:alfresco/audit-services-context.xml" />
+    <import resource="classpath:alfresco/attributes-service-context.xml"/>
+    <import resource="classpath:alfresco/linkvalidation-service-context.xml"/>
+    <import resource="classpath:alfresco/remote-services-context.xml"/>
+    <!-- DISABLED: import resource="classpath:alfresco/office-addin-context.xml"/ -->
+    <!-- DISABLED: import resource="classpath:alfresco/projects-context.xml"/ -->
+    <!-- DISABLED: import resource="classpath:alfresco/blog-context.xml"/ -->
+	
+	<!-- patch-services-context.xml contains DoQui-specific customization -->
+    <import resource="classpath*:alfresco/patch/*-context.xml" />
+    <import resource="classpath*:alfresco/domain/*-context.xml" />
+
+    <!--
+         Import all modules and related components.
+         Extensions are explicitly imported after this so that the default
+         mechanism can still be used to override module-specific beans.
+    -->
+    <!-- import resource="classpath*:alfresco/module-context.xml" / -->
+
+    <!--
+         Import of general extensions and bean overrides.
+
+         To give developers final control over the tuning
+         of their own local build, the dev-context.xml file
+         is processed last  (note: dev-context.xml isn't
+         part of the source tree itself).
+
+         For details, see:
+         http://wiki.alfresco.com/wiki/Developer_Runtime_Configuration
+    
+    <import resource="classpath*:alfresco/extension/*-context.xml"/>
+    <import resource="classpath*:alfresco/extension/dev-context.xml" />
+	-->
+
+	<!-- Import of DoQui-specific bean overrides -->
+	<import resource="classpath*:alfresco/ecmengine/*-context.xml" />
+	
+	<!-- Import of external configuration bean overrides -->
+	<import resource="@@extensionProtocol@@:@@extensionPath@@/*-context.xml" />
+	<!-- import resource="@@extensionProtocol@@*:@@extensionPath@@/*-context.xml" / -->
+</beans>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ECMENGINE Content Model -->
+
+<model name="ecm-sys:ecmengineSystemModel"
+	xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<!-- Optional meta-data about the model -->
+	<description>ECMENGINE System Model</description>
+	<author>Doqui</author>
+	<version>1.0</version>
+
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<!-- Import Alfresco Content Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/content/1.0"
+			prefix="cm" />
+		<!-- Import Alfresco Application Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/application/1.0"
+			prefix="app" />
+		<!-- Import Alfresco System Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/system/1.0"
+			prefix="sys" />
+	</imports>
+
+	<!-- Introduction of new namespaces defined by this model -->
+	<namespaces>
+		<namespace uri="http://www.doqui.it/model/ecmengine/system/1.0"
+			prefix="ecm-sys" />
+	</namespaces>
+
+	<aspects>
+		<aspect name="ecm-sys:splitted">
+			<title>Splitted node</title>
+			<description>Nodo splittato</description>
+			<associations>
+				<child-association name="ecm-sys:parts">
+					<source>
+						<mandatory>false</mandatory>
+						<many>false</many>
+					</source>
+					<target>
+						<class>sys:base</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+					<duplicate>false</duplicate>
+				</child-association>
+			</associations>
+		</aspect>
+
+		<aspect name="ecm-sys:part">
+			<title>Splitted node part</title>
+			<description>Parte di un nodo splittato</description>
+		</aspect>
+
+		<aspect name="ecm-sys:aooadministrable">
+			<title>AOO Administrable</title>
+			<description>Nodo di competenza di una specifica AOO</description>
+			<properties>
+				<property name="ecm-sys:aooid">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:aooadministrator">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+
+		<aspect name="ecm-sys:state">
+			<title>Node State</title>
+			<description>Stato del nodo</description>
+			<properties>
+				<property name="ecm-sys:stato">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+
+		<aspect name="ecm-sys:destination">
+			<title>Node Destination</title>
+			<description>Destinazione di uno spostamento</description>
+			<properties>
+				<property name="ecm-sys:idNodeDestination">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="ecm-sys:repoDestination">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="ecm-sys:idNodeSource">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:repoSource">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+
+		<aspect name="ecm-sys:modified">
+			<title>Node Modified</title>
+			<description>Nodo modificato</description>
+			<properties>
+				<property name="ecm-sys:modificato">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:autore">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:dataModifica">
+					<type>d:datetime</type>
+					<mandatory>true</mandatory>
+				</property>
+			</properties>
+		</aspect>
+
+		<aspect name="ecm-sys:encrypted">
+			<title>Encrypted content</title>
+			<description>Encryption-related properties</description>
+			<properties>
+				<property name="ecm-sys:keyId">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:transformation">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="ecm-sys:encryptedBySource">
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="ecm-sys:initializationVector">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="ecm-sys:renditionable">
+			<title>Renditionable content</title>
+			<description>Rendition-related properties</description>
+			<properties>
+				<property name="ecm-sys:xslId">
+					<type>d:any</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="ecm-sys:renditionTransformer">
+			<title>XSL able to turn a XML into a rendition</title>
+			<description>Property related to a rendition transformer</description>
+			<properties>
+				<property name="ecm-sys:renditionId">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:genMimeType">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ecm-sys:transformerDescription">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="ecm-sys:renditionDocument">
+			<title>A rendition</title>
+			<description>Property related to a rendition document</description>
+			<properties>
+				<property name="ecm-sys:renditionDescription">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="ecm-sys:streamedContent">
+			<title>A streamed content</title>
+			<description>Property related to a big-size-file content streamed by cxf and mtom</description>
+		</aspect>
+        <!-- MB: MultiContentStore support -->
+		<aspect name="ecm-sys:storage">
+			<title>Storage identifier</title>
+			<description>ContentStore utilizzato dal nodo</description>
+			<properties>
+				<property name="ecm-sys:storageId">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+                    <!--
+					<protected>true</protected>
+                    -->
+				</property>
+			</properties>
+		</aspect>
+	</aspects>
+</model>

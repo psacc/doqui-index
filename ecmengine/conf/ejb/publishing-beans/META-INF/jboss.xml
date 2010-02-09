@@ -1,0 +1,29 @@
+<!DOCTYPE jboss PUBLIC "-//JBoss//DTD JBOSS 4.0//EN" "http://www.jboss.org/j2ee/dtd/jboss_4_0.dtd">
+<jboss>
+	<enterprise-beans>
+		<session>
+			<ejb-name>EcmEngineManagementBean@@ejbextension@@</ejb-name>
+			<jndi-name>ecmengine/ejb/ManagementBean@@ejbextension@@</jndi-name>
+			<clustered>@@clustered@@</clustered>
+			<cluster-config>
+				<partition-name>@@cluster_partition@@</partition-name>
+			</cluster-config>
+		</session>
+		<session>
+			<ejb-name>EcmEngineSearchBean@@ejbextension@@</ejb-name>
+			<jndi-name>ecmengine/ejb/SearchBean@@ejbextension@@</jndi-name>
+			<clustered>@@clustered@@</clustered>
+			<cluster-config>
+				<partition-name>@@cluster_partition@@</partition-name>
+			</cluster-config>
+		</session>
+		<session>
+			<ejb-name>EcmEngineBackofficeBean@@ejbextension@@</ejb-name>
+			<jndi-name>ecmengine/ejb/BackofficeBean@@ejbextension@@</jndi-name>
+			<clustered>@@clustered@@</clustered>
+			<cluster-config>
+				<partition-name>@@cluster_partition@@</partition-name>
+			</cluster-config>
+		</session>
+	</enterprise-beans>
+</jboss>

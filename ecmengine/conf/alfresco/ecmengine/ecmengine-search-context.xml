@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<!-- Indexing and Lucene beans definition -->
+<beans>
+	<alias alias="indexerComponent"
+		name="@@standardOrMultirepo@@IndexerComponent" />
+	<alias alias="searchService"
+		name="@@standardOrMultirepo@@SearchService" />
+	<alias alias="admSearchService"
+		name="@@standardOrMultirepo@@AdmSearchService" />
+	<alias alias="indexerAndSearcherFactory"
+		name="@@standardOrMultirepo@@IndexerAndSearcherFactory" />
+	<alias alias="admLuceneIndexerAndSearcherFactory"
+		name="@@standardOrMultirepo@@AdmLuceneIndexerAndSearcherFactory" />
+	<alias alias="avmLuceneIndexerAndSearcherFactory"
+		name="@@standardOrMultirepo@@AvmLuceneIndexerAndSearcherFactory" />
+	<alias alias="luceneCategoryService"
+		name="@@standardOrMultirepo@@LuceneCategoryService" />
+	<alias alias="LuceneFullTextSearchIndexer"
+		name="@@standardOrMultirepo@@LuceneFullTextSearchIndexerProxy" />
+	<alias alias="luceneFullTextSearchIndexer"
+		name="@@standardOrMultirepo@@LuceneFullTextSearchIndexer" />
+
+	<!-- Index recovery -->
+	<alias alias="indexRecoveryComponent"
+		name="@@standardOrMultirepo@@IndexRecoveryComponent" />
+	<alias alias="avmIndexRecoveryComponent"
+		name="@@standardOrMultirepo@@AvmIndexRecoveryComponent" />
+	<alias alias="missingContentReindexComponent"
+		name="@@standardOrMultirepo@@MissingContentReindexComponent" />
+
+	<!-- Index tracking -->
+	<alias alias="admIndexTrackerComponent"
+		name="@@standardOrMultirepo@@IndexTrackerComponent" />
+
+	<!-- Splitting support -->
+	<alias alias="multiRepositoryAdmLuceneIndexerAndSearcherFactory"
+		name="multiRepository@@isSplitting@@AdmLuceneIndexerAndSearcherFactory" />
+
+	<!-- BEGIN: from core-services-context.xml -->
+
+	<bean id="standardIndexerComponent"
+		class="org.alfresco.repo.search.IndexerComponent">
+		<property name="indexerAndSearcherFactory">
+			<ref bean="standardIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryIndexerComponent"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.RepositoryAwareIndexerComponent">
+		<property name="indexerAndSearcherFactory">
+			<ref bean="multiRepositoryIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="standardSearchService"
+		class="org.alfresco.repo.search.SearcherComponent">
+		<property name="indexerAndSearcherFactory">
+			<ref bean="standardIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositorySearchService"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.RepositoryAwareSearcherComponent">
+		<property name="indexerAndSearcherFactory">
+			<ref bean="multiRepositoryIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="standardAdmSearchService"
+		class="org.alfresco.repo.search.SearcherComponent">
+		<property name="indexerAndSearcherFactory">
+			<ref bean="standardAdmLuceneIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryAdmSearchService"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.RepositoryAwareSearcherComponent">
+		<property name="indexerAndSearcherFactory">
+			<ref bean="multiRepositoryAdmLuceneIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<!--                                                                               -->
+	<!-- Generic factory for making indexers and searchers for a given protocol or store -->
+	<!--                                                                               -->
+	<bean id="standardIndexerAndSearcherFactory"
+		class="org.alfresco.repo.service.StoreRedirectorProxyFactory">
+		<property name="proxyInterface">
+			<value>org.alfresco.repo.search.IndexerAndSearcher</value>
+		</property>
+		<property name="defaultBinding">
+			<ref bean="standardAdmLuceneIndexerAndSearcherFactory"></ref>
+		</property>
+		<property name="redirectedProtocolBindings">
+			<map>
+				<entry key="workspace">
+					<ref bean="standardAdmLuceneIndexerAndSearcherFactory"/>
+				</entry>
+				<entry key="versionStore">
+					<ref bean="standardAdmLuceneIndexerAndSearcherFactory"/>
+				</entry>
+				<entry key="avm">
+					<ref bean="standardAvmLuceneIndexerAndSearcherFactory"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryIndexerAndSearcherFactory"
+		class="org.alfresco.repo.service.StoreRedirectorProxyFactory">
+		<property name="proxyInterface">
+			<value>
+				it.doqui.index.ecmengine.business.personalization.multirepository.index.RepositoryAwareIndexerAndSearcher
+			</value>
+		</property>
+		<property name="defaultBinding">
+			<ref bean="multiRepositoryAdmLuceneIndexerAndSearcherFactory"/>
+		</property>
+		<property name="redirectedProtocolBindings">
+			<map>
+				<entry key="workspace">
+					<ref bean="multiRepositoryAdmLuceneIndexerAndSearcherFactory"/>
+				</entry>
+				<entry key="versionStore">
+					<ref bean="multiRepositoryAdmLuceneIndexerAndSearcherFactory"/>
+				</entry>
+				<entry key="avm">
+					<ref bean="multiRepositoryAvmLuceneIndexerAndSearcherFactory"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Indexer and searchers for lucene -->
+
+	<bean id="standardLuceneCategoryService"
+		class="org.alfresco.repo.search.impl.lucene.LuceneCategoryServiceImpl">
+		<property name="nodeService">
+			<ref bean="nodeService" />
+		</property>
+		<property name="dictionaryService">
+			<ref bean="dictionaryService" />
+		</property>
+		<property name="namespacePrefixResolver">
+			<ref bean="namespaceService" />
+		</property>
+		<property name="indexerAndSearcher">
+			<ref bean="standardIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryLuceneCategoryService"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.RepositoryAwareLuceneCategoryServiceImpl">
+		<property name="nodeService">
+			<ref bean="nodeService" />
+		</property>
+		<property name="publicNodeService">
+            <ref bean="NodeService" />
+        </property>
+		<property name="dictionaryService">
+			<ref bean="dictionaryService" />
+		</property>
+		<property name="namespacePrefixResolver">
+			<ref bean="namespaceService" />
+		</property>
+		<property name="tenantService">
+			<ref bean="tenantService" />
+		</property>
+		<property name="indexerAndSearcher">
+			<ref bean="multiRepositoryIndexerAndSearcherFactory" />
+		</property>
+	</bean>
+
+	<bean id="standardLuceneFullTextSearchIndexerProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		depends-on="standardIndexerAndSearcherFactory">
+		<property name="proxyInterfaces">
+			<value>
+				org.alfresco.repo.search.impl.lucene.fts.FullTextSearchIndexer
+			</value>
+		</property>
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="standardLuceneFullTextSearchIndexer" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">${server.transaction.mode.default}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- bean id="multiRepositoryLuceneFullTextSearchIndexerProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		depends-on="multiRepositoryIndexerAndSearcherFactory">
+		<property name="proxyInterfaces">
+			<value>
+				it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.fts.RepositoryAwareFullTextSearchIndexer
+			</value>
+		</property>
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="multiRepositoryLuceneFullTextSearchIndexer" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">${server.transaction.mode.default}</prop>
+			</props>
+		</property>
+	</bean -->
+
+	<!-- Bean to backup Lucene indexes -->
+	<bean id="luceneIndexBackupComponent"
+		class="org.alfresco.repo.search.impl.lucene.AbstractLuceneIndexerAndSearcherFactory$LuceneIndexBackupComponent">
+		<property name="transactionService">
+			<ref bean="transactionService" />
+		</property>
+		<property name="factories">
+			<set>
+				<ref bean="admLuceneIndexerAndSearcherFactory" />
+			</set>
+		</property>
+		<property name="nodeService">
+			<ref bean="nodeService" />
+		</property>
+		<property name="targetLocation">
+			<value>${dir.indexes.backup}</value>
+		</property>
+	</bean>
+	<!-- END: from core-services-context.xml -->
+
+	<!-- BEGIN: from repository-context.xml -->
+
+	<!--  				-->
+	<!-- FACTORY LUCENE	-->
+	<!--  				-->
+
+	<!-- Factory astratte -->
+	<bean id="abstractLuceneIndexerAndSearcherFactory" abstract="true">
+		<property name="dictionaryService" 				ref="dictionaryService" />
+		<property name="nameSpaceService" 				ref="namespaceService" />
+		<property name="contentService" 				ref="contentService" />
+		<property name="indexRootLocation" 				value="${dir.indexes}" />
+		<property name="queryRegister" 					ref="queryRegisterComponent" />
+		<property name="maxAtomicTransformationTime" 	value="${lucene.maxAtomicTransformationTime}" />
+		<property name="queryMaxClauses" 				value="${lucene.query.maxClauses}" />
+		<property name="indexerBatchSize" 				value="${lucene.indexer.batchSize}" />
+		<property name="lockDirectory" 					value="${dir.indexes.lock}" />
+		<property name="indexerMaxFieldLength" 			value="${lucene.indexer.maxFieldLength}" />
+		<property name="writeLockTimeout" 				value="${lucene.write.lock.timeout}" />
+		<property name="commitLockTimeout" 				value="${lucene.commit.lock.timeout}" />
+		<property name="lockPollInterval" 				value="${lucene.lock.poll.interval}" />
+		<property name="defaultMLIndexAnalysisMode" 	value="EXACT_LANGUAGE_AND_ALL" />
+		<property name="defaultMLSearchAnalysisMode" 	value="EXACT_LANGUAGE_AND_ALL" />
+		<property name="threadPoolExecutor" 			ref="indexThreadPoolExecutor" />
+	</bean>
+
+	<bean id="abstractMultiRepositoryLuceneIndexerAndSeracherFactory" abstract="true"
+		parent="abstractLuceneIndexerAndSearcherFactory" >
+		<property name="repositoryManager" 	ref="repositoryManager" />
+	</bean>
+
+	<!-- Factory concrete -->
+	<bean id="standardAdmLuceneIndexerAndSearcherFactory"
+		parent="abstractLuceneIndexerAndSearcherFactory"
+		class="org.alfresco.repo.search.impl.lucene.ADMLuceneIndexerAndSearcherFactory">
+		<property name="nodeService" 	ref="mlAwareNodeService" />
+		<property name="tenantService" 	ref="tenantService" />
+	</bean>
+
+	<bean id="multiRepositoryStandardAdmLuceneIndexerAndSearcherFactory"
+		parent="abstractMultiRepositoryLuceneIndexerAndSeracherFactory"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.RepositoryAwareADMLuceneIndexerAndSearcherFactory">
+		<property name="nodeService" 	ref="mlAwareNodeService" />
+		<property name="tenantService" 	ref="tenantService" />
+	</bean>
+
+	<bean id="multiRepositorySplittingAdmLuceneIndexerAndSearcherFactory"
+		parent="abstractMultiRepositoryLuceneIndexerAndSeracherFactory"
+		class="it.doqui.index.ecmengine.business.personalization.splitting.index.lucene.MultiRepositorySplittingADMLuceneFactory">
+		<property name="splittingNodeService" 	ref="splittingDbNodeService" />
+		<property name="tenantService" 			ref="tenantService" />
+		<property name="fileformatService"      ref="fileformatService" />
+	</bean>
+
+	<bean id="standardAvmLuceneIndexerAndSearcherFactory"
+		parent="abstractLuceneIndexerAndSearcherFactory"
+		class="org.alfresco.repo.search.impl.lucene.AVMLuceneIndexerAndSearcherFactory">
+		<property name="nodeService" 	ref="mlAwareNodeService" />
+		<property name="contentStore" 	ref="fileContentStore" />
+		<property name="avmService" 	ref="avmService" />
+		<property name="avmSyncService"	ref="avmSyncService" />
+	</bean>
+
+	<bean id="multiRepositoryAvmLuceneIndexerAndSearcherFactory"
+		parent="abstractMultiRepositoryLuceneIndexerAndSeracherFactory"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.RepositoryAwareAVMLuceneIndexerAndSearcherFactory">
+		<property name="nodeService" 	ref="mlAwareNodeService" />
+		<property name="contentStore" 	ref="fileContentStore" />
+		<property name="avmService" 	ref="avmService" />
+		<property name="avmSyncService"	ref="avmSyncService" />
+	</bean>
+	<!-- 				-->
+	<!-- END FACTORY	-->
+	<!-- 				-->
+
+	<!-- Indexer full-text -->
+	<bean id="standardLuceneFullTextSearchIndexer"
+		class="org.alfresco.repo.search.impl.lucene.fts.FullTextSearchIndexerImpl">
+		<property name="indexerAndSearcherFactory" ref="standardIndexerAndSearcherFactory" />
+	</bean>
+
+	<bean id="multiRepositoryLuceneFullTextSearchIndexerProxy"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.index.lucene.fts.RepositoryAwareFullTextSearchIndexerImpl">
+		<property name="indexerAndSearcherFactory" ref="multiRepositoryIndexerAndSearcherFactory" />
+		<property name="retryingTransactionHelper" ref="retryingTransactionHelper" />
+	</bean>
+	<alias alias="multiRepositoryLuceneFullTextSearchIndexer" name="multiRepositoryLuceneFullTextSearchIndexerProxy" />
+
+	<!-- END: from repository-context.xml -->
+
+	<!-- BEGIN: from index-recovery-context.xml -->
+
+	<bean id="standardIndexRecoveryComponent"
+		class="org.alfresco.repo.node.index.FullIndexRecoveryComponent"
+		parent="indexRecoveryComponentBase">
+		<property name="recoveryMode">
+			<value>${index.recovery.mode}</value>
+		</property>
+		<property name="indexTracker">
+			<ref bean="standardIndexTrackerComponent"/>
+		</property>
+		<property name="ftsIndexer">
+			<ref bean="standardLuceneFullTextSearchIndexerProxy" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryIndexRecoveryComponent"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.node.index.FullIndexRecoveryComponent"
+		parent="indexRecoveryComponentBase">
+		<property name="recoveryMode">
+			<value>${index.recovery.mode}</value>
+		</property>
+		<property name="indexTracker">
+			<ref bean="multiRepositoryIndexTrackerComponent"/>
+		</property>
+		<property name="ftsIndexer">
+			<ref bean="multiRepositoryLuceneFullTextSearchIndexerProxy" />
+		</property>
+		<property name="tenantAdminService">
+			<ref bean="tenantAdminService" />
+		</property>
+	</bean>
+
+	<bean id="standardAvmIndexRecoveryComponent"
+		class="org.alfresco.repo.node.index.AVMFullIndexRecoveryComponent"
+		parent="indexRecoveryComponentBase">
+		<property name="recoveryMode">
+			<value>${index.recovery.mode}</value>
+		</property>
+		<property name="avmService">
+			<ref bean="avmService" />
+		</property>
+		<property
+			name="avmSnapShotTriggeredIndexingMethodInterceptor">
+			<ref bean="avmSnapShotTriggeredIndexingMethodInterceptor" />
+		</property>
+		<property name="ftsIndexer">
+			<ref bean="standardLuceneFullTextSearchIndexerProxy" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryAvmIndexRecoveryComponent"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.node.index.AVMFullIndexRecoveryComponent"
+		parent="indexRecoveryComponentBase">
+		<property name="recoveryMode">
+			<value>${index.recovery.mode}</value>
+		</property>
+		<property name="avmService">
+			<ref bean="avmService" />
+		</property>
+		<property
+			name="avmSnapShotTriggeredIndexingMethodInterceptor">
+			<ref bean="avmSnapShotTriggeredIndexingMethodInterceptor" />
+		</property>
+		<property name="ftsIndexer">
+			<ref bean="multiRepositoryLuceneFullTextSearchIndexerProxy" />
+		</property>
+	</bean>
+
+	<!-- Bean that attempts to index content that was previously missing -->
+	<bean id="standardMissingContentReindexComponent"
+		class="org.alfresco.repo.node.index.MissingContentReindexComponent"
+		parent="indexRecoveryComponentBase">
+		<property name="ftsIndexer">
+			<ref bean="standardLuceneFullTextSearchIndexerProxy" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryMissingContentReindexComponent"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.node.index.MissingContentReindexComponent"
+		parent="indexRecoveryComponentBase">
+		<property name="ftsIndexer">
+			<ref bean="multiRepositoryLuceneFullTextSearchIndexerProxy" />
+		</property>
+	</bean>
+
+	<bean id="standardIndexTrackerComponent"
+		class="org.alfresco.repo.node.index.IndexTransactionTracker"
+		parent="indexRecoveryComponentBase">
+		<property name="maxTxnDurationMinutes">
+			<value>${index.tracking.maxTxnDurationMinutes}</value>
+		</property>
+		<property name="reindexLagMs">
+			<value>${index.tracking.reindexLagMs}</value>
+		</property>
+		<property name="maxRecordSetSize">
+			<value>${index.tracking.maxRecordSetSize}</value>
+		</property>
+		<property name="ftsIndexer">
+			<ref bean="standardLuceneFullTextSearchIndexerProxy" />
+		</property>
+	</bean>
+
+	<bean id="multiRepositoryIndexTrackerComponent"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.node.index.IndexTransactionTracker"
+		parent="indexRecoveryComponentBase">
+		<property name="maxTxnDurationMinutes">
+			<value>${index.tracking.maxTxnDurationMinutes}</value>
+		</property>
+		<property name="reindexLagMs">
+			<value>${index.tracking.reindexLagMs}</value>
+		</property>
+		<property name="maxRecordSetSize">
+			<value>${index.tracking.maxRecordSetSize}</value>
+		</property>
+		<property name="ftsIndexer">
+			<ref bean="multiRepositoryLuceneFullTextSearchIndexerProxy" />
+		</property>
+		<property name="jobManager">
+			<ref bean="ecmengineJobManager" />
+		</property>
+		<property name="tenantAdminService">
+			<ref bean="tenantAdminService" />
+		</property>
+	</bean>
+
+	<!-- END: from index-recovery-context.xml -->
+
+</beans>

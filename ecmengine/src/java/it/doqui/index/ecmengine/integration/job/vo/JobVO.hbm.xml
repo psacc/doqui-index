@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    '-//Hibernate/Hibernate Mapping DTD 3.0//EN' 
+    'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>
+
+<hibernate-mapping default-lazy="false">
+
+	<class name="it.doqui.index.ecmengine.integration.job.vo.JobVO" table="ECMENGINE_T_Job">
+		<id name="id" type="int">
+			<column name="id_job" />			
+			<generator class="native">
+				<param name="sequence">SEQ_Job</param>
+			</generator>
+		</id>
+		<property name="ref" type="string" not-null="true">
+			<column name="nome_esecutore" length="64" />
+		</property>
+		<property name="timestampCreazione" type="timestamp" not-null="true">
+			<column name="timestamp_creazione" length="19" />
+		</property>
+		<property name="status" type="string" not-null="true">
+			<column name="stato" length="64" />
+		</property>
+		<property name="message" type="string">
+			<column name="messaggio" length="100" />
+		</property>
+		<property name="lastUpdate" type="timestamp" not-null="true">
+			<column name="timestamp_ultimo_aggiornamento" length="19" />
+		</property>
+	</class>
+
+</hibernate-mapping>

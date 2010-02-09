@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+ 
+<beans>
+	<!-- BEGIN: Da network-protocol-context.xml -->
+	<bean id="fileServersConfigSource"	class="java.lang.Object" />
+	<bean id="fileServersConfigService"	class="java.lang.Object" />
+
+	<!-- Filesystem Interface -->
+	<bean id="contentDiskDriver"		class="java.lang.Object" />
+	<bean id="cifsHelper"				class="java.lang.Object" />
+   
+	<!-- AVM Filesystem Interface -->
+	<bean id="avmDiskDriver"			class="java.lang.Object" />
+	
+	<!-- File State Reaper -->
+	<bean id="fileStateReaper"			class="java.lang.Object" />
+	<!-- END:   Da network-protocol-context.xml -->
+	
+</beans>

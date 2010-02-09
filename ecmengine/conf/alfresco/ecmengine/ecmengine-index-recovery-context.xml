@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+   
+   <!-- bean id="indexRecoveryComponentBase" abstract="true" >
+      <property name="authenticationComponent">
+         <ref bean="authenticationComponent" />
+      </property>
+      <property name="transactionService">
+         <ref bean="transactionService" />
+      </property>
+      <property name="indexer">
+         <ref bean="indexerComponent" />
+      </property>
+      <!- - VALORE DEFINITO NEI BEAN CHE EREDITANO DA QUESTO - property name="ftsIndexer">
+         <ref bean="LuceneFullTextSearchIndexer" />
+      </property - ->
+      <property name="searcher">
+         <ref bean="searchService" />
+      </property>
+      <property name="nodeService">
+          <ref bean="nodeService" />
+      </property>
+      <property name="nodeDaoService">
+          <ref bean="nodeDaoService" />
+      </property>
+   </bean -->
+	
+   	<!-- Missing Content -->
+   	<!-- Bean that attempts to index content that was previously missing -->
+   	<bean
+         id="missingContentReindexComponent"
+         class="org.alfresco.repo.node.index.MissingContentReindexComponent"
+         parent="indexRecoveryComponentBase">
+   	</bean>
+   
+   	<!-- bean id="admIndexTrackerComponent" class="java.lang.Object" / -->
+   	
+   	<!-- Index tracker for AVM - Disabled by DoQui -->
+	<bean id="avmIndexTrackerComponent" class="java.lang.Object" />
+	
+	<!-- Schedule index tracking for AVM - Disabled by DoQui -->
+    <bean id="avmIndexTrackerTrigger" class="java.lang.Object" />
+
+</beans>

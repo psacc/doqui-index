@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    '-//Hibernate/Hibernate Mapping DTD 3.0//EN'
+    'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>
+
+<hibernate-mapping default-lazy="false">
+
+	<class name="it.doqui.index.ecmengine.integration.integrity.vo.IntegrityNodeVO" table="alf_node" abstract="true">
+		<subselect>
+			select * from alf_node
+		</subselect>
+		<id name="id" type="long">
+			<column name="id" />
+		</id>
+		<property name="version" type="long" not-null="true">
+			<column name="version"/>
+		</property>
+		<property name="protocol" type="string" not-null="true">
+			<column name="protocol" length="50" />
+		</property>
+		<property name="identifier" type="string" not-null="true">
+			<column name="identifier" length="100" />
+		</property>
+		<property name="uuid" type="string" not-null="true">
+			<column name="uuid" length="36" />
+		</property>
+		<property name="type_qname" type="string" not-null="true">
+			<column name="type_qname" length="255" />
+		</property>
+		<property name="acl_id" type="long" not-null="false">
+			<column name="acl_id"/>
+		</property>
+	</class>
+
+</hibernate-mapping>

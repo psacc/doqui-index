@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+ 
+<beans>
+
+	<bean id="ecmengineAuditDAO" class="it.doqui.index.ecmengine.integration.audit.dao.AuditDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="maxRollingRows" value="${audit.max.rolling.rows}" />
+	</bean>
+
+	<bean id="ecmengineAuditTrailDAO" class="it.doqui.index.ecmengine.integration.audittrail.dao.AuditTrailDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="maxRollingRows" value="${audit.trail.max.rolling.rows}" />
+	</bean>
+
+	<bean id="ecmengineAuditManagerTarget" class="it.doqui.index.ecmengine.business.audit.AuditManager">
+		<property name="auditDAO" ref="ecmengineAuditDAO" />
+	</bean>
+
+	<bean id="ecmengineAuditTrailManagerTarget" class="it.doqui.index.ecmengine.business.audit.AuditTrailManager">
+		<property name="auditTrailDAO" ref="ecmengineAuditTrailDAO" />
+	</bean>
+
+    <bean id="ecmengineAuditManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>it.doqui.index.ecmengine.business.audit.AuditBusinessInterface</value>
+        </property>
+        <property name="transactionManager">
+            <ref bean="transactionManager" />
+        </property>
+        <property name="target">
+            <ref bean="ecmengineAuditManagerTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">${server.transaction.mode.default}, PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="ecmengineAuditTrailManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>it.doqui.index.ecmengine.business.audit.AuditTrailBusinessInterface</value>
+        </property>
+        <property name="transactionManager">
+            <ref bean="transactionManager" />
+        </property>
+        <property name="target">
+            <ref bean="ecmengineAuditTrailManagerTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">${server.transaction.mode.default}, PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

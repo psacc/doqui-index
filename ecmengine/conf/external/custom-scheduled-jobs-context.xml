@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+    <!-- Disabilito l'audit -->
+    @@exclude_audit_on@@
+    <bean id="ecmengineAuditManagerTarget"      class="it.doqui.index.ecmengine.business.audit.AuditManagerNull"/>
+    <bean id="ecmengineAuditTrailManagerTarget" class="it.doqui.index.ecmengine.business.audit.AuditTrailManagerNull"/>
+    @@exclude_audit_off@@
+
+    <!-- Begin Job Spostamento CSI Piemonte -->
+    <!--
+    <bean id="moveAggregationJobDetail"
+        class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass">
+            <value>
+                it.doqui.index.ecmengine.business.job.move.MoveAggregationJob
+            </value>
+        </property>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="authenticationComponent">
+                    <ref bean="authenticationComponent" />
+                </entry>
+                <entry key="nodeService">
+                    <ref bean="nodeService" />
+                </entry>
+                <entry key="transactionService">
+                    <ref bean="transactionService" />
+                </entry>
+                <entry key="authenticationService">
+                    <ref bean="authenticationService" />
+                </entry>
+                <entry key="searchService">
+                    <ref bean="searchService" />
+                </entry>
+                <entry key="copyService">
+                    <ref bean="copyService" />
+                </entry>
+                <entry key="namespaceService">
+                    <ref bean="namespaceService" />
+                </entry>
+                <entry key="dictionaryService">
+                    <ref bean="dictionaryService" />
+                </entry>
+                <entry key="permissionService">
+                    <ref bean="permissionService" />
+                </entry>
+                <entry key="ecmengineAuditManager">
+                    <ref bean="ecmengineAuditManager" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="moveAggregationTrigger"
+        class="org.alfresco.util.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="moveAggregationJobDetail" />
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory" />
+        </property>
+        <property name="cronExpression">
+            <value>0 0/5 * * * ?</value>
+        </property>
+    </bean>
+    -->
+    <!-- End Job Spostamento -->
+
+
+    <!-- Begin Job Backup CSI Piemonte -->
+    <!--
+    <bean id="metaDataBackupJobDetail"
+        class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass">
+            <value>it.doqui.index.ecmengine.business.job.backup.MetaDataBackupJob</value>
+        </property>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="contentDirectory">
+                    <value>${dir.contentstore}</value>
+                </entry>
+                <entry key="authenticationComponent">
+                    <ref bean="authenticationComponent" />
+                </entry>
+                <entry key="nodeService">
+                    <ref bean="nodeService" />
+                </entry>
+                <entry key="transactionService">
+                    <ref bean="transactionService" />
+                </entry>
+                <entry key="authenticationService">
+                    <ref bean="authenticationService" />
+                </entry>
+                <entry key="searchService">
+                    <ref bean="searchService" />
+                </entry>
+                <entry key="copyService">
+                    <ref bean="copyService" />
+                </entry>
+                <entry key="namespaceService">
+                    <ref bean="namespaceService" />
+                </entry>
+                <entry key="dictionaryService">
+                    <ref bean="dictionaryService" />
+                </entry>
+                <entry key="permissionService">
+                    <ref bean="permissionService" />
+                </entry>
+                <entry key="repository-properties">
+                    <ref bean="repository-properties" />
+                </entry>
+                <entry key="ecmengineAuditManager">
+                    <ref bean="ecmengineAuditManager" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="metaDataBackupTrigger"
+        class="org.alfresco.util.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="metaDataBackupJobDetail" />
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory" />
+        </property>
+        <property name="cronExpression">
+            <value>0 2/5 22 * * ?</value>
+        </property>
+    </bean>
+    -->
+    <!-- End Job Backup -->
+
+    <!-- begin job gestione tenant-->
+    <bean id="tenantAdminJobDetail"
+        class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass">
+            <value>
+                it.doqui.index.ecmengine.business.job.tenant.TenantAdminJob
+            </value>
+        </property>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="tenantAdminService">
+                    <ref bean="tenantAdminService" />
+                </entry>
+                <entry key="ecmengineJobManager">
+                    <ref bean="ecmengineJobManager" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="tenantAdminTrigger"
+        class="org.alfresco.util.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="tenantAdminJobDetail" />
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory" />
+        </property>
+        <property name="cronExpression">
+            <value>0 0 3 * * ?</value>
+        </property>
+    </bean>
+    <!-- end job gestione tenant -->
+
+    <!-- begin job delete tenant-->
+    <bean id="tenantDeleteJobDetail"
+        class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass">
+            <value>
+                it.doqui.index.ecmengine.business.job.tenant.TenantDeleteJob
+            </value>
+        </property>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="tenantAdminService">
+                    <ref bean="tenantAdminService" />
+                </entry>
+                <entry key="ecmengineJobManager">
+                    <ref bean="ecmengineJobManager" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="tenantDeleteTrigger"
+        class="org.alfresco.util.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="tenantDeleteJobDetail" />
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory" />
+        </property>
+        <property name="cronExpression">
+            <value>0 0 4 * * ?</value>
+        </property>
+    </bean>
+    <!-- end job gestione tenant -->
+
+    <!-- begin ArchiveImporterJob -->
+    <bean id="ArchiveImporterJobBean"
+        class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass">
+            <value>
+                it.doqui.index.ecmengine.business.personalization.importer.ArchiveImporterJob
+            </value>
+        </property>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="ecmengineJobManager">
+                    <ref bean="ecmengineJobManager" />
+                </entry>
+                <entry key="transactionService">
+                    <ref bean="transactionService" />
+                </entry>
+                <entry key="namespaceService">
+                    <ref bean="namespaceService" />
+                </entry>
+                <entry key="contentService">
+                    <ref bean="contentService" />
+                </entry>
+                <entry key="nodeService">
+                    <ref bean="nodeService" />
+                </entry>
+                <entry key="authenticationService">
+                    <ref bean="authenticationService" />
+                </entry>
+                <entry key="importDirectory">
+                    <value>${dir.contentstore.import}</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="ArchiveImporterJobTrigger"
+        class="org.alfresco.util.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="ArchiveImporterJobBean" />
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory" />
+        </property>
+        <property name="cronExpression">
+            <value>0 * * * * ?</value>
+        </property>
+    </bean>
+    <!-- end ArchiveImporterJob -->
+
+    <!-- Esclusioni Terracotta -->
+    <!--
+      In caso di uso di terracotta, deve essere disabilitato il job ftsIndexerTrigger
+      in tutte le altre configurazioni, questo job rimane attivo.
+      -->
+    @@rem.terracotta.ftsIndexerTrigger@@
+    <!--
+    //MB: non possiamo disabilitarlo in ambienti online-batch, ma solo in ambienti online. Per ora commentiamo il disable
+    @@rem.terracotta.indexTrackerTrigger@@
+    -->
+    <!-- Esclusioni Terracotta -->
+
+</beans>

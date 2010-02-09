@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by pippo (csi) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="MetaDati">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="oggetto">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="valore" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="campo" type="xs:string"/>
+										<xs:element name="dataInizio" type="xs:dateTime"/>
+										<xs:element name="dataFine" type="xs:dateTime" nillable="true" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="autore" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="valore" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="cognome" type="xs:string"/>
+										<xs:element name="nome" type="xs:string"/>
+										<xs:element name="dataInizio" type="xs:dateTime"/>
+										<xs:element name="dataFine" type="xs:dateTime" nillable="true" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

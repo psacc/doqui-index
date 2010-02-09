@@ -1,0 +1,63 @@
+<porta-delegata name="pd_ecmenginemassive">
+	<services>
+		<service name="EcmEngineMassive"
+		         public-interface-class="it.doqui.index.ecmengine.interfacecsi.massive.EcmEngineMassiveInterface">
+			<operations>
+				<operation name="massiveCreateContent" type="synch-call">
+					<param-list>
+						<param name="parent" type="it.doqui.index.ecmengine.dto.Node[]" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content[]" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node[]" />
+				</operation>
+				<operation name="massiveUpdateMetadata" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node[]" />
+						<param name="newContent" type="it.doqui.index.ecmengine.dto.engine.management.Content[]" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="massiveGetContentMetadata" type="synch-call">
+					<param-list>
+						<param name="nodes" type="it.doqui.index.ecmengine.dto.Node[]" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultContent[]" />
+				</operation>
+				<operation name="massiveRetrieveContentData" type="synch-call">
+					<param-list>
+						<param name="nodes" type="it.doqui.index.ecmengine.dto.Node[]" />
+						<param name="contents" type="it.doqui.index.ecmengine.dto.engine.management.Content[]" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultContent[]" />
+				</operation>
+				<operation name="massiveDeleteContent" type="synch-call">
+					<param-list>
+						<param name="nodes" type="it.doqui.index.ecmengine.dto.Node[]" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="testResources" type="synch-call">
+     				<param-list />
+     				<ret-val type="boolean" />
+    			</operation>
+			</operations>
+		</service>
+	</services>
+	<config>
+		<url-pa></url-pa>
+		<pluggable-pd-list
+			chooser-class="it.csi.csi.porte.FixedDelegateChooser">
+			<pluggable-pd name="pa_ecmenginemassive_soap"
+				class="it.csi.csi.porte.soap.apache.PortaDelegataSoap"
+				url-pa="http://@@url_soap@@/servlet/rpcrouter">
+				<properties />
+			</pluggable-pd>
+		</pluggable-pd-list>
+		<queue-manager url="" />
+	</config>
+</porta-delegata>

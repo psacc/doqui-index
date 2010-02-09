@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    '-//Hibernate/Hibernate Mapping DTD 3.0//EN' 
+    'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>
+
+<hibernate-mapping default-lazy="false">
+
+	<class name="it.doqui.index.ecmengine.integration.job.vo.JobParamVO" table="ECMENGINE_T_Parametri_Job">
+		<id name="id" type="int">
+			<column name="id_parametro_job" />
+			<generator class="native">
+				<param name="sequence">SEQ_Parametri_Job</param>
+			</generator>
+		</id>
+		<property name="jobId" type="int" not-null="true">
+			<column name="id_job" />
+		</property>
+		<property name="name" type="string" not-null="true">
+			<column name="nome_parametro" length="64" />
+		</property>
+		<property name="val" type="string">
+			<column name="valore_parametro" length="256" />
+		</property>
+	</class>
+
+</hibernate-mapping>

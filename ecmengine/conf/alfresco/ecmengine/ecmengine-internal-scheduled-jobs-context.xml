@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+    <!--                 -->
+    <!-- Scheduled tasks -->
+    <!--                 -->
+
+    <bean id="ftsIndexerTrigger" class="org.alfresco.util.TriggerBean">
+        <property name="jobDetail">
+            <bean id="standardFtsIndexerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+                <property name="jobClass" value="@@ftsIndexerJobClass@@" />
+                <property name="jobDataAsMap">
+                    <map>
+                        <entry key="bean" value-ref="LuceneFullTextSearchIndexer" />
+                    </map>
+                </property>
+            </bean>
+        </property>
+        <property name="scheduler" 				ref="schedulerFactory" />
+        <property name="startDelayMinutes" 		value="1" />
+        <property name="repeatIntervalMinutes" 	value="1" />
+    </bean>
+    
+    <bean id="tempFileCleanerTrigger" class="org.alfresco.util.TriggerBean">
+        <property name="jobDetail">
+            <bean id="tempFileCleanerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+                <property name="jobClass" value="org.alfresco.util.TempFileProvider$TempFileCleanerJob" />
+                <property name="jobDataAsMap">
+                    <map>
+                        <entry key="protectHours" value="1" />
+                    </map>
+                </property>
+            </bean>
+        </property>
+        <property name="scheduler" 				ref="schedulerFactory" />
+        <property name="startDelayMinutes" 		value="30" />
+        <property name="repeatIntervalMinutes" 	value="20" /><!-- Era 60 - DoQui -->
+    </bean>
+    
+    <!-- Disabled by DoQui -->
+    <bean id="avmOrphanReaperJob" class="java.lang.Object" />
+
+    <!-- Job to scan for expired content in website staging areas - Disabled by DoQui -->
+    <bean id="avmExpiredContentTrigger" class="java.lang.Object" />
+    
+    <!-- enable scheduler property to activate -->
+	<bean id="userUsageCollapseJob" class="org.alfresco.util.TriggerBean">
+        <property name="jobDetail">
+            <bean id="userUsageTrackingJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+                <property name="jobClass" value="org.alfresco.repo.usage.UserUsageCollapseJob" />
+				<property name="jobDataAsMap">
+					<map>
+						<entry key="userUsageCollapseComponent" value-ref="userUsageCollapseComponent" />
+					</map>
+	           </property>
+	        </bean>
+        </property>
+        
+        <!-- enable this to activate bean 
+        <property name="scheduler" ref="schedulerFactory" />
+		--> 
+		<property name="scheduler"><null /></property><!-- Disabled -->
+                
+        <!-- start after 5 minutes and repeat every 5 minutes -->
+        <property name="startDelayMinutes" 		value="5" />
+        <property name="repeatIntervalMinutes" 	value="5" />
+         
+    </bean>
+    
+    <!-- enable scheduler property to activate -->
+    <bean id="userUsageBootstrapJob" class="org.alfresco.util.TriggerBean">
+        <property name="jobDetail">
+            <bean id="userUsageBootstrapDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+                <property name="jobClass" value="org.alfresco.repo.usage.UserUsageBootstrapJob" />
+				<property name="jobDataAsMap">
+					<map>
+						<entry key="userUsageBootstrapComponent" value-ref="userUsageBootstrapComponent" />
+					</map>
+				</property>
+            </bean>
+        </property>
+        
+        <!-- enable this to activate bean 
+        <property name="scheduler" ref="schedulerFactory" />
+		--> 
+		<property name="scheduler"><null /></property><!-- Disabled -->
+                
+        <!-- start after bootstrap (0 minutes) and run once -->
+        <property name="startDelayMinutes" 	value="0" />
+        <property name="repeatCount" 		value="0" />
+    </bean>
+    
+</beans>

@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+    <bean id="aooService" 
+    	class="it.doqui.index.ecmengine.business.personalization.security.AOOServiceImpl" >
+        <property name="nodeService" ref="nodeService" />
+        <property name="authenticationService" ref="authenticationService" />
+        <property name="aooAdminCache" ref="aooAdminCache"/>
+    </bean>
+    
+    <bean id="aooAdministratorDynamicAuthority"
+    	class="it.doqui.index.ecmengine.business.personalization.security.AOOAdministratorDynamicAuthority" >
+    	<property name="aooService" ref="aooService" />
+    </bean>
+    
+    <bean id="AOOService_security"
+    	class="net.sf.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor" >
+    	<property name="authenticationManager" ref="authenticationManager" />
+    	<property name="accessDecisionManager" ref="accessDecisionManager" />
+    	<property name="afterInvocationManager" ref="afterInvocationManager" />
+    	<property name="objectDefinitionSource">
+    		<value>
+    			it.doqui.index.ecmengine.business.personalization.security.AOOService.getAooAdministrator=ACL_ALLOW
+    			it.doqui.index.ecmengine.business.personalization.security.AOOService.hasAooAdministrator=ACL_ALLOW
+    			it.doqui.index.ecmengine.business.personalization.security.AOOService.setAooAdministrator=ACL_NODE.0.ecm-sys:aooadministrable.SetAOOAdmin
+    		</value>
+    	</property>
+    </bean>
+    
+	<!-- ===================================== -->
+	<!-- AOO admin cache                       -->
+	<!-- ===================================== -->
+
+	<!-- The cross-transaction shared cache for AOO Administrators -->
+   
+	<bean name="aooAdminSharedCache" class="org.alfresco.repo.cache.EhCacheAdapter">
+		<property name="cache">
+			<bean class="org.springframework.cache.ehcache.EhCacheFactoryBean" >
+				<property name="cacheManager">
+					<ref bean="internalEHCacheManager" />
+				</property>
+				<property name="cacheName">
+					<value>org.alfresco.cache.aooAdminCache</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+   
+	<!-- The transactional cache for Node Ownership -->
+   
+	<bean name="aooAdminCache" class="org.alfresco.repo.cache.TransactionalCache">
+		<property name="sharedCache">
+			<ref bean="aooAdminSharedCache" />
+		</property>
+		<property name="cacheManager" >
+			<ref bean="transactionalEHCacheManager" />
+		</property>
+		<property name="name">
+			<value>org.alfresco.aooAdminTransactionalCache</value>
+		</property>
+		<property name="maxCacheSize">
+			<value>10000</value>
+		</property>
+	</bean>
+</beans>

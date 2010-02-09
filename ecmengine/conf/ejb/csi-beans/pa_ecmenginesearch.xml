@@ -1,0 +1,36 @@
+<porta-applicativa name="pa_ecmenginesearch"
+                   public-interface-class="it.doqui.index.ecmengine.interfacecsi.search.EcmEngineSearchInterface">
+  <listener
+    class="it.csi.csi.porte.ejb20.PortaApplicativaEJB"
+    listening-url="pa_ecmenginesearch"
+  />
+  <adapter  class="it.csi.csi.wrapper.StatelessEJBAdapter">
+   <properties>
+     <property name="jndi-name" value="ecmengine/ejb/SearchBean@@ejbextension@@"/>
+     <property name="home-class" value="it.doqui.index.ecmengine.business.publishing.search.EcmEngineSearchHome" />
+     <property name="remote-class" value="it.doqui.index.ecmengine.business.publishing.search.EcmEngineSearch" />
+   </properties>
+  </adapter>
+    @@cooptrace_begin@@
+	<options>
+	<pre-function-handler-list>
+	<pluggable-fh name="ecmcoopt_handler_pre" class="it.csi.cooptrace.business.handler.PaTracingHandler">
+		<properties>
+			<property name="componentname" value="ecmcoopt@@target.customer_line@@"/>
+			<property name="callername" value="ecmcoopt@@target.customer_line@@"/>
+			<property name="interfacename" value="EcmEngineSearchInterface"/>
+		</properties>
+	</pluggable-fh>
+	</pre-function-handler-list>
+		<post-function-handler-list>
+			<pluggable-fh name="ecmcoopt_handler_post"	class="it.csi.cooptrace.business.handler.PaTracingHandler">
+				<properties>
+					<property name="componentname" value="ecmcoopt@@target.customer_line@@"/>
+					<property name="callername" value="ecmcoopt@@target.customer_line@@"/>
+					<property name="interfacename" value="EcmEngineSearchInterface"/>
+				</properties>
+			</pluggable-fh>
+		</post-function-handler-list>
+	</options>
+	@@cooptrace_end@@
+</porta-applicativa>

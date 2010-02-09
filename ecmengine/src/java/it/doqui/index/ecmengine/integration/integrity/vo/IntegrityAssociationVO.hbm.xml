@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    '-//Hibernate/Hibernate Mapping DTD 3.0//EN'
+    'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>
+
+<hibernate-mapping default-lazy="false">
+
+	<class name="it.doqui.index.ecmengine.integration.integrity.vo.IntegrityAssociationVO" table="alf_child_assoc" abstract="true">
+		<subselect>
+			select * from alf_child_assoc
+		</subselect>
+		<id name="id" type="long">
+			<column name="id" />
+		</id>
+		<property name="version" type="long" not-null="true">
+			<column name="version"/>
+		</property>
+		<property name="parent_node_id" type="long" not-null="true">
+			<column name="parent_node_id"/>
+		</property>
+		<property name="child_node_id" type="long" not-null="true">
+			<column name="child_node_id"/>
+		</property>
+		<property name="type_qname" type="string" not-null="true">
+			<column name="type_qname" length="255" />
+		</property>
+		<property name="qname" type="string" not-null="true">
+			<column name="qname" length="255" />
+		</property>
+		<property name="child_node_name" type="string" not-null="true">
+			<column name="child_node_name" length="50" />
+		</property>
+		<property name="child_node_name_crc" type="long" not-null="true">
+			<column name="child_node_name_crc"/>
+		</property>		
+		<property name="is_primary" type="boolean" not-null="false">
+			<column name="is_primary"/>
+		</property>				
+		<property name="assoc_index" type="long" not-null="false">
+			<column name="assoc_index"/>
+		</property>
+	</class>
+
+</hibernate-mapping>

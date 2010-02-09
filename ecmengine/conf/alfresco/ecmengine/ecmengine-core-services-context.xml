@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<!-- Core and miscellaneous bean definitions -->
+<beans>
+
+    <!-- MBeanServer Connector (registers itself with custom alfrescoMBeanServer) -->
+    <!-- destroy-method added by DoQui -->
+    <bean id="serverConnector"
+          class="org.springframework.jmx.support.ConnectorServerFactoryBean"
+          depends-on="registry" destroy-method="destroy">
+        <property name="server"      ref="alfrescoMBeanServer"/>
+        <property name="objectName"  value="connector:name=rmi"/>
+        <property name="serviceUrl"  value="service:jmx:rmi://localhost/jndi/rmi://localhost:${alfresco.rmi.services.port}/@@target@@/jmxrmi" />
+        <property name="environment">
+            <map>
+                <!-- The following keys are only valid when sun jmx is used -->
+                <entry key="jmx.remote.x.password.file" value="${alfresco.jmx.dir}/alfresco-jmxrmi.password"/>
+                <entry key="jmx.remote.x.access.file"   value="${alfresco.jmx.dir}/alfresco-jmxrmi.access"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
+       <property name="server" ref="alfrescoMBeanServer"/>
+       <property name="beans">
+         <map>
+           <!-- MBeans to register with alfrescoMBeanServer -->
+           <entry key="Alfresco:Name=VirtServerRegistry,Type=VirtServerRegistry" value-ref="VirtServerRegistry"/>
+         </map>
+       </property>
+    </bean>
+
+    <bean id="FileServerConfig" class="java.lang.Object" />
+
+    <!--                        -->
+    <!-- I18N                   -->
+    <!--                        -->
+
+    <bean id="resourceBundles" class="org.alfresco.i18n.ResourceBundleBootstrapComponent">
+        <property name="resourceBundles">
+            <list>
+                <value>alfresco.messages.system-messages</value>
+                <value>alfresco.messages.module-messages</value>
+                <value>alfresco.messages.dictionary-messages</value>
+                <value>alfresco.messages.version-service</value>
+                <value>alfresco.messages.permissions-service</value>
+                <value>alfresco.messages.content-service</value>
+                <value>alfresco.messages.coci-service</value>
+                <value>alfresco.messages.template-service</value>
+                <value>alfresco.messages.lock-service</value>
+                <value>alfresco.messages.patch-service</value>
+                <value>alfresco.messages.schema-update</value>
+                <value>alfresco.messages.copy-service</value>
+                <value>alfresco.messages.avm-messages</value>
+                <value>alfresco.messages.content-filter-languages</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="securityBootstrap" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.SecurityBootstrap">
+       <property name="repositoryManager"  ref="repositoryManager"/>
+       <property name="tenantAdminService" ref="tenantAdminService"/>
+    </bean>
+
+</beans>

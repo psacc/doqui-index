@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<deploy-descriptor 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../conf/deploy-descriptor.xsd">
+	
+	<rilascio 
+		ambiente="@@registry.ambiente@@" 
+		cliente="@@registry.cliente@@" 
+		istanza="@@registry.istanza@@" 
+		unita-installazione="ecmengine@@ejbextension@@"
+		staging="false"
+	>
+		<prodotto codice="index" versione="@@registry.versione.prodotto@@">
+			<descrizione>Gestione documentale</descrizione>
+		</prodotto>
+		<componente codice="ecmengine@@ejbextension@@">
+			<descrizione>Componente gestione contenuti</descrizione>
+		</componente>
+	</rilascio>
+	
+	<lista-servizi>
+		<servizio nome="EcmEngineManagement@@ejbextension@@" versione-intf="@@registry.versione.servizi@@" versione-impl="@@registry.versione.servizi@@" tipo-servizio="A" tipo-erogazione="@@erogazione@@">			
+		</servizio>
+		<servizio nome="EcmEngineSearch@@ejbextension@@" versione-intf="@@registry.versione.servizi@@" versione-impl="@@registry.versione.servizi@@" tipo-servizio="A" tipo-erogazione="@@erogazione@@">			
+		</servizio>
+		<servizio nome="EcmEngineBackoffice@@ejbextension@@" versione-intf="@@registry.versione.servizi@@" versione-impl="@@registry.versione.servizi@@" tipo-servizio="A" tipo-erogazione="@@erogazione@@">			
+		</servizio>
+		<servizio nome="EcmEngineMassive@@ejbextension@@" versione-intf="@@registry.versione.servizi@@" versione-impl="@@registry.versione.servizi@@" tipo-servizio="A" tipo-erogazione="@@erogazione@@">			
+		</servizio>
+	</lista-servizi>
+	
+	<lista-binding>
+		<binding servizio="EcmEngineManagement@@ejbextension@@" versione="@@registry.versione.servizi@@" protocollo="@@registry.protocollo@@">
+			<endpoint>
+				<csi-endpoint pd-file="pd_ecmenginemanagement.xml"/>
+			</endpoint>
+		</binding>
+		<binding servizio="EcmEngineSearch@@ejbextension@@" versione="@@registry.versione.servizi@@" protocollo="@@registry.protocollo@@">
+			<endpoint>
+				<csi-endpoint pd-file="pd_ecmenginesearch.xml"/>
+			</endpoint>
+		</binding>
+		<binding servizio="EcmEngineBackoffice@@ejbextension@@" versione="@@registry.versione.servizi@@" protocollo="@@registry.protocollo@@">
+			<endpoint>
+				<csi-endpoint pd-file="pd_ecmenginebackoffice.xml"/>
+			</endpoint>
+		</binding>
+		<binding servizio="EcmEngineMassive@@ejbextension@@" versione="@@registry.versione.servizi@@" protocollo="@@registry.protocollo@@">
+			<endpoint>
+				<csi-endpoint pd-file="pd_ecmenginemassive.xml"/>
+			</endpoint>
+		</binding>
+	</lista-binding>
+</deploy-descriptor>

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Enterprise-Bean: true
+Class-Path: lib/ lib/audit.jar lib/audit-trail.jar lib/csi-stadapter-1.4.5.jar lib/personalization-importer.jar

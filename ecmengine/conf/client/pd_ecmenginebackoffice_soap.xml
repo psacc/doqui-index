@@ -1,0 +1,412 @@
+<porta-delegata name="pd_ecmenginebackoffice">
+	<services>
+		<service name="EcmEngineBackoffice"
+			public-interface-class="it.doqui.index.ecmengine.interfacecsi.backoffice.EcmEngineBackofficeInterface">
+			<operations>
+				<operation name="createUser" type="synch-call">
+					<param-list>
+						<param name="nuovoUtente"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="java.lang.String" />
+				</operation>
+				<operation name="updateUserMetadata"
+					type="synch-call">
+					<param-list>
+						<param name="utente"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="createGroup" type="synch-call">
+					<param-list>
+						<param name="nuovoGruppo"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="gruppoPadre"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="java.lang.String" />
+				</operation>
+				<operation name="addUserToGroup" type="synch-call">
+					<param-list>
+						<param name="utente"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="gruppo"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="removeUserFromGroup"
+					type="synch-call">
+					<param-list>
+						<param name="utente"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="gruppo"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="listUsers" type="synch-call">
+					<param-list>
+						<param name="gruppo"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.User[]" />
+				</operation>
+				<operation name="listAllUsers" type="synch-call">
+					<param-list>
+						<param name="filter"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.User[]" />
+				</operation>
+				<operation name="retrieveUserMetadata"
+					type="synch-call">
+					<param-list>
+						<param name="filter"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.User" />
+				</operation>
+				<operation name="updateUserPassword"
+					type="synch-call">
+					<param-list>
+						<param name="utente"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="deleteUser" type="synch-call">
+					<param-list>
+						<param name="utente"
+							type="it.doqui.index.ecmengine.dto.backoffice.User" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="deleteGroup" type="synch-call">
+					<param-list>
+						<param name="gruppo"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="addAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="acls"
+							type="it.doqui.index.ecmengine.dto.AclRecord[]" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="removeAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="acls"
+							type="it.doqui.index.ecmengine.dto.AclRecord[]" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="updateAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="acls"
+							type="it.doqui.index.ecmengine.dto.AclRecord[]" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="listAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="params"
+							type="it.doqui.index.ecmengine.dto.backoffice.AclListParams" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.AclRecord[]" />
+				</operation>
+				<operation name="setInheritsAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="inherits" type="boolean" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="isInheritsAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="boolean" />
+				</operation>
+				<operation name="resetAcl" type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="filter"
+							type="it.doqui.index.ecmengine.dto.AclRecord" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="checkRepositoryIntegrity"
+					type="synch-call">
+					<param-list>
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.backoffice.IntegrityReport[]" />
+				</operation>
+				<operation name="importDataArchive" type="synch-call">
+					<param-list>
+						<param name="dataArchive"
+							type="it.doqui.index.ecmengine.dto.backoffice.DataArchive" />
+						<param name="node"
+							type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="getSystemProperties"
+					type="synch-call">
+					<param-list>
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.SystemProperty[]" />
+				</operation>
+				<operation name="getRepositories" type="synch-call">
+					<param-list>
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.Repository[]" />
+				</operation>
+				<operation name="getAllModelDescriptors"
+					type="synch-call">
+					<param-list>
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.model.ModelDescriptor[]" />
+				</operation>
+				<operation name="getModelDefinition"
+					type="synch-call">
+					<param-list>
+						<param name="modelDescriptor"
+							type="it.doqui.index.ecmengine.dto.backoffice.model.ModelDescriptor" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.model.ModelMetadata" />
+				</operation>
+				<operation name="getTypeDefinition"
+					type="synch-call">
+					<param-list>
+						<param name="typeDescriptor"
+							type="it.doqui.index.ecmengine.dto.backoffice.model.ModelDescriptor" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.model.TypeMetadata" />
+				</operation>
+				<operation name="listGroups" type="synch-call">
+					<param-list>
+						<param name="parentGroup"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.Group[]" />
+				</operation>
+				<operation name="listAllGroups" type="synch-call">
+					<param-list>
+						<param name="filter"
+							type="it.doqui.index.ecmengine.dto.backoffice.Group" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.Group[]" />
+				</operation>
+				<operation name="createTenant" type="synch-call">
+					<param-list>
+						<param name="tenant"
+							type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="enableTenant" type="synch-call">
+					<param-list>
+						<param name="tenant"
+							type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="disableTenant" type="synch-call">
+					<param-list>
+						<param name="tenant"
+							type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="getAllTenants" type="synch-call">
+					<param-list>
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.Tenant[]" />
+				</operation>
+				<operation name="getTenant" type="synch-call">
+					<param-list>
+						<param name="tenant"
+							type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+				</operation>
+				<operation name="tenantExists" type="synch-call">
+					<param-list>
+						<param name="tenant"
+							type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="boolean" />
+				</operation>
+				<operation name="tenantDelete" type="synch-call">
+					<param-list>
+						<param name="tenant"
+							type="it.doqui.index.ecmengine.dto.backoffice.Tenant" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="boolean" />
+				</operation>
+				<operation name="getAllCustomModels"
+					type="synch-call">
+					<param-list>
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val
+						type="it.doqui.index.ecmengine.dto.backoffice.model.CustomModel[]" />
+				</operation>
+				<operation name="deployCustomModel" type="synch-call">
+					<param-list>
+						<param name="model"
+							type="it.doqui.index.ecmengine.dto.backoffice.model.CustomModel" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="undeployCustomModel"
+					type="synch-call">
+					<param-list>
+						<param name="model"
+							type="it.doqui.index.ecmengine.dto.backoffice.model.CustomModel" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="activateCustomModel"
+					type="synch-call">
+					<param-list>
+						<param name="model"
+							type="it.doqui.index.ecmengine.dto.backoffice.model.CustomModel" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="deactivateCustomModel"
+					type="synch-call">
+					<param-list>
+						<param name="model"
+							type="it.doqui.index.ecmengine.dto.backoffice.model.CustomModel" />
+						<param name="context"
+							type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="testResources" type="synch-call">
+					<param-list />
+					<ret-val type="boolean" />
+				</operation>
+			</operations>
+		</service>
+	</services>
+	<config>
+		<url-pa></url-pa>
+		<pluggable-pd-list
+			chooser-class="it.csi.csi.porte.FixedDelegateChooser">
+			<pluggable-pd name="pa_ecmenginebackoffice_soap"
+				class="it.csi.csi.porte.soap.apache.PortaDelegataSoap"
+				url-pa="http://@@url_soap@@/servlet/rpcrouter">
+				<properties />
+			</pluggable-pd>
+		</pluggable-pd-list>
+		<queue-manager url="" />
+	</config>
+</porta-delegata>

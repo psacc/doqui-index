@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <!-- Disabilito l'audit -->
+    @@exclude_audit_on@@
+    <bean id="ecmengineAuditManagerTarget"      class="it.doqui.index.ecmengine.business.audit.AuditManagerNull"/>
+    <bean id="ecmengineAuditTrailManagerTarget" class="it.doqui.index.ecmengine.business.audit.AuditTrailManagerNull"/>
+    @@exclude_audit_off@@
+
+    <!-- Esclusioni Terracotta -->
+    <!--
+      In caso di uso di terracotta, deve essere disabilitato il job ftsIndexerTrigger
+      in tutte le altre configurazioni, questo job rimane attivo.
+      -->
+    @@rem.terracotta.ftsIndexerTrigger@@
+    <!--
+    //MB: non possiamo disabilitarlo in ambienti online-batch, ma solo in ambienti online. Per ora commentiamo il disable
+    @@rem.terracotta.indexTrackerTrigger@@
+    -->
+    <!-- Esclusioni Terracotta -->
+
+</beans>

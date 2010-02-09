@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<weblogic-ejb-jar xmlns="http://www.bea.com/ns/weblogic/90"
+  xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.bea.com/ns/weblogic/90
+                      http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd">
+
+	<description>DoQui</description>
+	<weblogic-enterprise-bean>
+		<ejb-name>EcmEngineSecurityBean@@ejbextension@@</ejb-name>
+		<stateless-session-descriptor>
+		</stateless-session-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<jndi-name>ecmengine/ejb/SecurityBean@@ejbextension@@</jndi-name>
+	</weblogic-enterprise-bean>
+    @@exclude_pa_on@@
+	<weblogic-enterprise-bean>
+		<ejb-name>pa_ecmenginesecurity@@ejbextension@@</ejb-name>
+		<stateless-session-descriptor>
+		</stateless-session-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<jndi-name>ecmengine/ejb/SecurityBeanPA@@ejbextension@@</jndi-name>
+	</weblogic-enterprise-bean>
+    @@exclude_pa_off@@
+</weblogic-ejb-jar>

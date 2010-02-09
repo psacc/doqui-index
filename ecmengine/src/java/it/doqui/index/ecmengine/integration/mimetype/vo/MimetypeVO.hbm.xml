@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    '-//Hibernate/Hibernate Mapping DTD 3.0//EN'
+    'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>
+
+<hibernate-mapping default-lazy="false">
+
+	<class name="it.doqui.index.ecmengine.integration.mimetype.vo.MimetypeVO" table="ECMENGINE_D_Mimetype" abstract="true">
+		<subselect>
+		select * from ECMENGINE_D_Mimetype
+		</subselect>
+		<id name="id" type="int">
+			<column name="id_mime" />
+			<generator class="native">
+					<param name="sequence">SEQ_Mimetype</param>
+			</generator>
+		</id>
+		<property name="fileExtension" type="string" not-null="true">
+			<column name="file_extension" length="10" />
+		</property>
+		<property name="mimeType" type="string" not-null="true">
+			<column name="mimetype" length="100" />
+		</property>
+		<property name="priority" type="int" not-null="true">
+			<column name="priority"/>
+		</property>
+	</class>
+
+</hibernate-mapping>

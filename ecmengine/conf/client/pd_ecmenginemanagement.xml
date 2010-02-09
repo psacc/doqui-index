@@ -1,0 +1,402 @@
+<porta-delegata name="pd_ecmenginemagement">
+	<services>
+		<service name="EcmEngineManagement@@ejbextension@@"
+		         public-interface-class="it.doqui.index.ecmengine.interfacecsi.management.EcmEngineManagementInterface">
+			<operations>
+				<operation name="checkOutContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="checkInContent" type="synch-call">
+					<param-list>
+						<param name="workingCopy" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="cancelCheckOutContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="getWorkingCopy" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="getAllVersions" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+     					<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.Version[]" />
+				</operation>
+				<operation name="getVersion" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="versionLabel" type="java.lang.String" />
+     					<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.Version" />
+				</operation>
+				<operation name="retrieveVersionContentData" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+     					<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="byte[]" />
+				</operation>
+				<operation name="revertVersion" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="versionLabel" type="java.lang.String" />
+     					<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="createContent" type="synch-call">
+					<param-list>
+						<param name="parent" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="deleteContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="purgeContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="purgeAllContents" type="synch-call">
+					<param-list>
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="restoreContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="restoreAllContents" type="synch-call">
+					<param-list>
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node[]" />
+				</operation>
+				<operation name="getContentMetadata" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultContent" />
+				</operation>
+				<operation name="getVersionMetadata" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.search.ResultContent" />
+				</operation>
+				<operation name="retrieveContentData" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="byte[]" />
+				</operation>
+				<operation name="updateContentData" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="linkContent" type="synch-call">
+					<param-list>
+						<param name="source" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="destination" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="association" type="it.doqui.index.ecmengine.dto.engine.management.Association" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="unLinkContent" type="synch-call">
+					<param-list>
+						<param name="source" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="destination" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="association" type="it.doqui.index.ecmengine.dto.engine.management.Association" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="updateMetadata" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="newContent" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="moveAggregation" type="synch-call">
+					<param-list>
+						<param name="source" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="destinationParent" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="logTrail" type="synch-call">
+					<param-list>
+						<param name="auditTrail" type="it.doqui.index.ecmengine.dto.engine.audit.AuditInfo" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="ricercaAuditTrail" type="synch-call">
+					<param-list>
+						<param name="parametriRicerca" type="it.doqui.index.ecmengine.dto.engine.audit.AuditTrailSearchParams" />
+					    <param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.audit.AuditInfo[]" />
+				</operation>
+				<operation name="checkEncryption" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.EncryptionInfo" />
+				</operation>
+				<operation name="transformContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="targetMimeType" type="java.lang.String" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="byte[]" />
+				</operation>
+				<operation name="startSimpleWorkflow" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="workflow" type="it.doqui.index.ecmengine.dto.engine.management.SimpleWorkflow" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="addSimpleWorkflowRule" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="workflow" type="it.doqui.index.ecmengine.dto.engine.management.SimpleWorkflow" />
+						<param name="rule" type="it.doqui.index.ecmengine.dto.engine.management.Rule" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="approveContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="rejectContent" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="getMimetype" type="synch-call">
+					<param-list>
+						<param name="mimetype" type="it.doqui.index.ecmengine.dto.engine.management.Mimetype" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.Mimetype[]" />
+				</operation>
+   				<operation name="testResources" type="synch-call">
+     				<param-list />
+     				<ret-val type="boolean" />
+    			</operation>
+   				<operation name="getFileFormatInfo" type="synch-call">
+     				<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+     				<ret-val type="it.doqui.index.ecmengine.dto.engine.management.FileFormatInfo[]" />
+    			</operation>
+   				<operation name="getFileFormatInfo" type="synch-call">
+     				<param-list>
+						<param name="fileInfo" type="it.doqui.index.ecmengine.dto.engine.management.FileInfo" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+     				<ret-val type="it.doqui.index.ecmengine.dto.engine.management.FileFormatInfo[]" />
+    			</operation>
+   				<operation name="getFileFormatVersion" type="synch-call">
+     				<param-list>
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+     				<ret-val type="it.doqui.index.ecmengine.dto.engine.management.FileFormatVersion" />
+    			</operation>
+   				<operation name="copyNode" type="synch-call">
+     				<param-list>
+						<param name="source" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="parent" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+     				<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+    			</operation>
+				<operation name="moveNode" type="synch-call">
+     				<param-list>
+						<param name="source" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="parent" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+     				<ret-val type="void" />
+    			</operation>
+    			<operation name="createCategory" type="synch-call">
+					<param-list>
+						<param name="categoryParent" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="category" type="it.doqui.index.ecmengine.dto.engine.management.Category" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="createRootCategory" type="synch-call">
+					<param-list>
+						<param name="rootCategory" type="it.doqui.index.ecmengine.dto.engine.management.Category" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="deleteCategory" type="synch-call">
+					<param-list>
+						<param name="categoryNode" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="void" />
+				</operation>
+				<operation name="addRenditionTransformer" type="synch-call">
+					<param-list>
+						<param name="nodoXml" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="renditionTransformer" type="it.doqui.index.ecmengine.dto.engine.management.RenditionTransformer" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="setRendition" type="synch-call">
+					<param-list>
+						<param name="nodoTransformer" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="renditionDocument" type="it.doqui.index.ecmengine.dto.engine.management.RenditionDocument" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="getRenditionTransformer" type="synch-call">
+					<param-list>
+						<param name="nodoTransformer" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.RenditionTransformer" />
+				</operation>
+				<operation name="getRendition" type="synch-call">
+					<param-list>
+						<param name="nodoTransformer" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.RenditionDocument" />
+				</operation>
+				<operation name="deleteRenditionTransformer" type="synch-call">
+					<param-list>
+						<param name="xml" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="renditionTransformer" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+     				<ret-val type="void" />
+				</operation>
+				<operation name="getRenditionTransformers" type="synch-call">
+					<param-list>
+						<param name="xml" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.RenditionTransformer[]" />
+				</operation>
+				<operation name="getRenditions" type="synch-call">
+					<param-list>
+						<param name="xml" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.RenditionDocument[]" />
+				</operation>
+				<operation name="generateRendition" type="synch-call">
+					<param-list>
+						<param name="xml" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="renditionTransformer" type="it.doqui.index.ecmengine.dto.engine.management.RenditionTransformer" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.management.RenditionDocument" />
+				</operation>
+			</operations>
+		</service>
+	</services>
+	<config>
+		<url-pa></url-pa>
+		<pluggable-pd-list chooser-class="it.csi.csi.porte.FixedDelegateChooser">
+			<pluggable-pd name="ecmenginemanagement"
+			              class="it.csi.csi.porte.ejb20.PortaDelegataEJB"
+			              url-pa="ecmengine/ejb/ManagementBeanPA@@ejbextension@@">
+				<properties>
+					<property name="java.naming.provider.url"
+					          value="@@url_to_connect@@" />
+					<property name="java.naming.factory.initial"
+					          value="@@context_factory@@" />
+					<property name="jnp.partitionName"
+					          value="@@cluster_partition@@" />
+					<property name="jnp.disableDiscovery"
+					          value="@@disable_discovery@@" />
+				</properties>
+			</pluggable-pd>
+		</pluggable-pd-list>
+		@@cooptrace_begin@@
+		<pre-function-handler-list>
+			<pluggable-fh name="ecmcoopt_handler_pre" class="it.csi.cooptrace.business.handler.PdTracingHandler">
+				<properties>
+					<property name="componentname" value="ecmcoopt@@target.customer_line@@"/>
+					<property name="callername" value="ecmcoopt@@target.customer_line@@"/>
+					<property name="interfacename" value="EcmEngineManagementInterface@@ejbextension@@"/>
+				</properties>
+			</pluggable-fh>
+		</pre-function-handler-list>
+		<post-function-handler-list>
+		<pluggable-fh name="ecmcoopt_handelr_post" class="it.csi.cooptrace.business.handler.PdTracingHandler">
+			<properties>
+				<property name="componentname" value="ecmcoopt@@target.customer_line@@"/>
+				<property name="callername" value="ecmcoopt@@target.customer_line@@"/>
+				<property name="interfacename" value="EcmEngineManagementInterface@@ejbextension@@"/>
+			</properties>
+			</pluggable-fh>
+		</post-function-handler-list>
+		@@cooptrace_end@@
+		<queue-manager url="" />
+	</config>
+</porta-delegata>

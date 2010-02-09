@@ -1,0 +1,62 @@
+<porta-delegata name="pd_ecmenginesecurity">
+	<services>
+		<service name="EcmEngineSecurity"
+		         public-interface-class="it.doqui.index.ecmengine.interfacecsi.security.EcmEngineSecurityInterface">
+			<operations>
+				<operation name="verifyDocument" type="synch-call">
+					<param-list>
+						<param name="envelopedContent" type="it.doqui.index.ecmengine.dto.engine.security.EnvelopedContent" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.security.VerifyReport" />
+				</operation>
+				<operation name="verifyDocument" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.security.VerifyReport" />
+				</operation>
+				<operation name="extractDocumentFromEnvelope" type="synch-call">
+					<param-list>
+						<param name="envelopedContent" type="it.doqui.index.ecmengine.dto.engine.security.EnvelopedContent" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.security.Document" />
+				</operation>
+				<operation name="extractDocumentFromEnvelope" type="synch-call">
+					<param-list>
+						<param name="node" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.engine.security.Document" />
+				</operation>
+				<operation name="createContentFromTemporaney" type="synch-call">
+					<param-list>
+						<param name="parentNode" type="it.doqui.index.ecmengine.dto.Node" />
+						<param name="content" type="it.doqui.index.ecmengine.dto.engine.management.Content" />
+						<param name="context" type="it.doqui.index.ecmengine.dto.OperationContext" />
+						<param name="tempNode" type="it.doqui.index.ecmengine.dto.Node" />
+					</param-list>
+					<ret-val type="it.doqui.index.ecmengine.dto.Node" />
+				</operation>
+				<operation name="testResources" type="synch-call">
+     				<param-list />
+     				<ret-val type="boolean" />
+    			</operation>
+			</operations>
+		</service>
+	</services>
+	<config>
+		<url-pa></url-pa>
+		<pluggable-pd-list
+			chooser-class="it.csi.csi.porte.FixedDelegateChooser">
+			<pluggable-pd name="pa_ecmenginesecurity_soap"
+				class="it.csi.csi.porte.soap.apache.PortaDelegataSoap"
+				url-pa="http://@@url_soap@@/servlet/rpcrouter">
+				<properties />
+			</pluggable-pd>
+		</pluggable-pd-list>
+		<queue-manager url="" />
+	</config>
+</porta-delegata>

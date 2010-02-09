@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<isd:service xmlns:isd="http://xml.apache.org/xml-soap/deployment" id="urn:pa_ecmenginebackoffice_soap">
+ <isd:provider type="org.apache.soap.providers.StatelessEJBProvider"
+               scope="Application" methods="invokeSynch invokeAsynch">
+  <isd:option key="JNDIName" value="ecmengine/ejb/BackofficeBeanPA"/>
+  <isd:option key="FullHomeInterfaceName" value="it.csi.csi.porte.ejb20.PortaApplicativaHome" />
+  <isd:option key="ContextProviderURL" value="@@url_to_connect@@" />
+  <isd:option key="FullContextFactoryName" value="@@context_factory@@" />
+ </isd:provider>
+ <isd:faultListener>org.apache.soap.server.ExceptionFaultListener</isd:faultListener>
+ <isd:mappings defaultRegistryClass="it.csi.csi.porte.soap.apache.GeneralizedMappingRegistry">
+ </isd:mappings>
+</isd:service>

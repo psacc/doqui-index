@@ -1,0 +1,575 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+
+<!--
+    Repository Bootstrap Sequence.
+
+    This file specifies the initialisation (and order of initialisation) to perform during Repository startup.
+
+    The pattern for adding new initialisation to the bootstrap sequence is as follows:
+
+    1) Develop a bean that implements the Spring interface ApplicationListener
+    2) Place the initialisation logic in the method onApplicationEvent(ApplicationEvent event)...
+
+       public void onApplicationEvent(ApplicationEvent event)
+       {
+          if (event instanceof ContextRefreshedEvent)
+          {
+             // initialisation logic here
+          }
+       }
+
+    3) Add the bean definition to this file - Note: the beans are initialised in the order they are specified.
+-->
+
+<beans>
+
+    <!-- ensure that the schema is bootstrapped -->
+    <bean id="schemaBootstrap" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.SchemaBootstrap" >
+       <property name="repositoryManager" ref="repositoryManager"/>
+       <property name="localSessionFactory">
+          <ref bean="&amp;sessionFactory"></ref>  <!-- inject the actual factory, not a session -->
+       </property>
+       <property name="updateSchema">
+          <value>${db.schema.update}</value>
+       </property>
+       <property name="postCreateScriptUrls">
+          <list>
+             <value>classpath:alfresco/dbscripts/create/2.1/${db.script.dialect}/AlfrescoPostCreate-2.1-FKIndexes.sql</value>
+             <value>classpath:alfresco/dbscripts/create/1.4/${db.script.dialect}/post-create-indexes-02.sql</value>
+          </list>
+       </property>
+       <property name="validateUpdateScriptPatches">
+          <list>
+          </list>
+       </property>
+       <property name="preUpdateScriptPatches">
+          <list>
+             <ref bean="patch.schemaUpdateScript-V1.4-1" />
+             <ref bean="patch.schemaUpdateScript-V1.4-2" />
+             <ref bean="patch.db-V2.1-NotNullColumns" />
+          </list>
+       </property>
+       <property name="postUpdateScriptPatches">
+          <list>
+             <ref bean="patch.db-V1.4-TxnCommitTimeIndex" />
+             <ref bean="patch.db-V2.1-FKIndexes" />
+             <ref bean="patch.db-V2.1-ExplicitIndexes" />
+             <ref bean="patch.db-V1.4-PerfIndexes02" />
+             <ref bean="patch.db-V2.1-JBPMData" />
+             <ref bean="patch.db-V2.1-VersionColumns2" />
+             <ref bean="patch.db-V2.1-JBPMProcessKey" />
+             <ref bean="patch.db-V2.1-RemoveWcmSubmittedAspect" />
+          </list>
+       </property>
+    </bean>
+
+    <!-- Bootstrap the AVM -->
+    <bean id="avmBootstrap" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.AvmBootstrap" >
+       <property name="repositoryManager" ref="repositoryManager"/>
+       <property name="issuers">
+          <list>
+             <ref bean="nodeIssuer" />
+             <ref bean="layerIssuer" />
+          </list>
+       </property>
+       <property name="avmLockingAwareService">
+       	 <ref bean="avmLockingAwareService"/>
+       </property>
+    </bean>
+
+    <!-- Bootstrap AVM Locking Service. -->
+    <bean id="avmLockingBootstrap" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.AVMLockingBootstrap">
+       <property name="repositoryManager" ref="repositoryManager"/>
+       <property name="avmLockingService">
+          <ref bean="avmLockingService"/>
+       </property>
+    </bean>
+
+    <!-- Bootstrap Files -->
+    <bean id="systemInfoBootstrap" parent="systemInfoImporter">
+       <property name="repositoryManager" ref="repositoryManager"/>
+    </bean>
+
+    <bean id="userBootstrap" parent="userStoreImporter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="bootstrapViews">
+            <list>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/alfrescoUserStore.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${alfresco_user_store.system_container.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/alfrescoAuthorityStore.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${alfresco_user_store.system_container.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/alfrescoAuthorityStorePermission.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${alfresco_user_store.system_container.childname}/sys:authorities</prop>
+                    <prop key="location">alfresco/bootstrap/emailServer.xml</prop>
+                </props>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="systemBootstrap" parent="systemStoreImporter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="bootstrapViews">
+            <list>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/descriptor.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/systemRegistry.xml</prop>
+                </props>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="versionBootstrap" parent="versionStoreImporter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="bootstrapViews">
+            <list>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/lightWeightVersionStore.xml</prop>
+                </props>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spacesArchiveBootstrap" parent="spacesArchiveStoreImporter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="bootstrapViews">
+            <list>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/spacesArchive.xml</prop>
+                </props>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spacesBootstrap" parent="spacesStoreImporter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="bootstrapViews">
+            <list>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/spaces.xml</prop>
+                    <prop key="messages">alfresco/messages/bootstrap-spaces</prop>
+                </props>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/system.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/categories.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/</prop>
+                    <prop key="location">alfresco/bootstrap/multilingualRoot.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.guest_home.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/tutorial.xml</prop>
+                    <prop key="messages">alfresco/messages/bootstrap-tutorial</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.templates.childname}</prop>
+                    <prop key="location">alfresco/templates/software_engineering_project.xml</prop>
+                    <prop key="messages">alfresco/messages/bootstrap-templates</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.templates.childname}</prop>
+                    <prop key="location">alfresco/templates/collaboration_project.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.templates.content.childname}</prop>
+                    <prop key="location">alfresco/templates/content_template_examples.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.templates.content.childname}</prop>
+                    <prop key="location">alfresco/templates/readme_template.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.templates.email.childname}</prop>
+                    <prop key="location">alfresco/templates/email_templates.acp</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.templates.rss.childname}</prop>
+                    <prop key="location">alfresco/templates/rss_templates.acp</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.scripts.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/example_javascripts.acp</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/webScripts.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/webScriptsExtensions.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/webScriptsReadme.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/customModelsSpace.acp</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/customMessagesSpace.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/customWebClientExtensionSpace.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/customWorkflowDefsSpace.acp</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/formsSpace.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/cm:categoryRoot</prop>
+                    <prop key="location">alfresco/bootstrap/tagRootCategory.xml</prop>
+                </props>
+                <props>
+                    <prop key="path">/${spaces.company_home.childname}</prop>
+                    <prop key="location">alfresco/bootstrap/projectsSpace.xml</prop>
+                    <prop key="messages">alfresco/messages/bootstrap-spaces</prop>
+                </props>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath:alfresco/bootstrap/st-admin-context.xml"/>
+    <import resource="classpath*:alfresco/extension/mt/mt-admin-context.xml"/>
+
+	<!-- Bootstrap of workflow definitions - Disabled by DoQui
+    <bean id="workflowBootstrap" parent="workflowDeployer">
+		<property name="workflowDefinitions">
+			<list>
+				<props>
+					<prop key="engineId">jbpm</prop>
+					<prop key="location">alfresco/workflow/review_processdefinition.xml</prop>
+					<prop key="mimetype">text/xml</prop>
+					<prop key="redeploy">false</prop>
+				</props>
+				<props>
+					<prop key="engineId">jbpm</prop>
+					<prop key="location">alfresco/workflow/adhoc_processdefinition.xml</prop>
+					<prop key="mimetype">text/xml</prop>
+					<prop key="redeploy">false</prop>
+				</props>
+				<props>
+					<prop key="engineId">jbpm</prop>
+			    	<prop key="location">alfresco/workflow/submit_processdefinition.xml</prop>
+			    	<prop key="mimetype">text/xml</prop>
+			    	<prop key="redeploy">false</prop>
+				</props>
+				<props>
+					<prop key="engineId">jbpm</prop>
+					<prop key="location">alfresco/workflow/changerequest_processdefinition.xml</prop>
+					<prop key="mimetype">text/xml</prop>
+					<prop key="redeploy">false</prop>
+				</props>
+			</list>
+		</property>
+		<property name="models">
+			<list>
+               <value>alfresco/workflow/workflowModel.xml</value>
+               <value>alfresco/workflow/wcmWorkflowModel.xml</value>
+			</list>
+		</property>
+		<property name="labels">
+			<list>
+			   <value>alfresco/workflow/workflow-messages</value>
+               <value>alfresco/workflow/wcm-workflow-messages</value>
+			</list>
+		</property>
+	</bean>
+	-->
+
+    <!-- Bootstrap any extensions -->
+    <!-- import resource="@@extensionProtocol@@:@@extensionPath@@/bootstrap/*-context.xml" / -->
+    <!-- import resource="@@extensionProtocol@@*:@@extensionPath@@/bootstrap/*-context.xml" / -->
+
+    <!-- Descriptor Service -->
+    <bean id="descriptorComponent" class="org.alfresco.repo.descriptor.DescriptorServiceImpl">
+		<property name="descriptor">
+			<value>classpath:alfresco/version.properties</value>
+		</property>
+		<property name="systemBootstrap">
+			<ref bean="systemBootstrap"/>
+		</property>
+		<property name="transactionService">
+			<ref bean="transactionService"/>
+		</property>
+		<property name="namespaceService">
+			<ref bean="namespaceService"/>
+		</property>
+		<property name="nodeService">
+			<ref bean="nodeService"/>
+		</property>
+		<property name="searchService">
+			<ref bean="searchService"/>
+		</property>
+	</bean>
+
+<!--
+	DOQUI 11/03/2008 - Moved bootstrap component from repo-admin-context.xml.
+	Dictionary repository bootstrap MUST be performed before index recovery in order to
+	load dynamic content models.
+-->
+	<bean id="dictionaryRepositoryBootstrap" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.DictionaryRepositoryBootstrap">
+		<property name="repositoryManager" ref="repositoryManager"/>
+		<property name="dictionaryDAO" ref="dictionaryDAO"/>
+		<property name="contentService" ref="ContentService"/>
+		<property name="searchService" ref="SearchService"/>
+		<property name="transactionService" ref="transactionComponent"/>
+		<property name="namespaceService" ref="namespaceService"/>
+		<property name="nodeService" ref="NodeService"/>
+		<property name="messageService" ref="messageService"/>
+		<property name="tenantService" ref="tenantService"/>
+		<property name="tenantDeployerService" ref="tenantAdminService"/>
+
+		<property name="repositoryModelsLocations">
+			<list>
+				<ref bean="customModelsRepositoryLocation" />
+			</list>
+		</property>
+
+		<property name="repositoryMessagesLocations">
+			<list>
+				<ref bean="customMessagesRepositoryLocation" />
+			</list>
+		</property>
+	</bean>
+
+    <!-- Perform index recovery before applying any patches -->
+    <!-- rebuild the index if required - before we check that it is there -->
+
+    <!-- MB: personalization of org.alfresco.repo.node.index.IndexRecoveryBootstrapBean -->
+    <bean id="indexRecoveryBootstrap" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.IndexRecoveryBootstrapBean">
+       <property name="repositoryManager" ref="repositoryManager"/>
+       <property name="indexRecoveryComponent">
+           <ref bean="indexRecoveryComponent"/>
+       </property>
+    </bean>
+
+    <bean id="avmIndexRecoveryBootstrap" class="org.alfresco.repo.node.index.IndexRecoveryBootstrapBean" >
+       <property name="indexRecoveryComponent">
+          <ref bean="avmIndexRecoveryComponent"/>
+       </property>
+    </bean>
+
+    <!-- This component checks the interconnection between the metadata, indexes and content -->
+    <bean id="configurationChecker" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.ConfigurationChecker">
+       <property name="repositoryManager" ref="repositoryManager"/>
+       <property name="strict">
+           <value>${system.bootstrap.config_check.strict}</value>
+       </property>
+       <property name="dirRoot">
+           <value>${dir.root}</value>
+       </property>
+       <property name="indexRecoveryMode">
+           <value>${index.recovery.mode}</value>
+       </property>
+       <!-- helper beans -->
+       <property name="transactionService">
+           <ref bean="transactionService"/>
+       </property>
+       <property name="systemBootstrap">
+           <ref bean="systemBootstrap"/>
+       </property>
+       <property name="namespaceService">
+           <ref bean="namespaceService"/>
+       </property>
+       <property name="nodeService">
+           <ref bean="nodeService"/>
+       </property>
+       <property name="searchService">
+           <ref bean="searchService"/>
+       </property>
+       <property name="contentService">
+           <ref bean="contentService"/>
+       </property>
+    </bean>
+
+
+    <!-- This component ensures that patches get applied on startup -->
+
+    <bean id="patchExecuter" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.PatchExecuter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="transactionService">
+            <ref bean="transactionService" />
+        </property>
+        <property name="patchService">
+            <ref bean="PatchService" />
+        </property>
+    </bean>
+
+    <!-- Import other Alfresco bootstrap components -->
+    <import resource="classpath*:alfresco/alfresco-*-bootstrap-context.xml" />
+
+    <!-- Start module components - Disabled by DoQui
+    <bean id="moduleStarter" class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.ModuleStarter">
+        <property name="repositoryManager" ref="repositoryManager"/>
+        <property name="moduleService">
+            <ref bean="ModuleService" />
+        </property>
+    </bean>
+	-->
+
+    <!-- CIFS Server - Disabled by DoQui
+    <bean id="fileServerConfiguration" class="org.alfresco.filesys.ServerConfigurationBean" parent="fileServerConfigurationBase">
+       <property name="configService">
+           <ref bean="fileServersConfigService"/>
+       </property>
+    </bean>
+
+    <bean id="cifsServer" class="org.alfresco.filesys.CIFSServerBean" destroy-method="stopServer">
+        <constructor-arg>
+           <ref local="fileServerConfiguration"/>
+        </constructor-arg>
+    </bean>
+    -->
+
+    <!-- FTP Server - Disabled by DoQui
+    <bean id="ftpServer" class="org.alfresco.filesys.FTPServerBean" destroy-method="stopServer">
+        <constructor-arg>
+           <ref local="fileServerConfiguration"/>
+        </constructor-arg>
+    </bean>
+    -->
+
+    <!-- NFS Server - Disabled by DoQui
+    <bean id="nfsServer" class="org.alfresco.filesys.NFSServerBean" destroy-method="stopServer">
+        <constructor-arg>
+           <ref local="fileServerConfiguration"/>
+        </constructor-arg>
+    </bean>
+	-->
+
+    <!-- Start the quartz scheduler -->
+
+    <bean id="schedulerStarter" class="org.alfresco.util.SchedulerStarterBean" >
+       <property name="scheduler">
+           <ref bean="schedulerFactory"/>
+       </property>
+    </bean>
+
+	<!-- Startup Message -->
+    <bean id="openOfficeConnectionTester" class="org.alfresco.util.OpenOfficeConnectionTester" >
+        <property name="connection">
+            <ref bean="openOfficeConnection" />
+        </property>
+        <property name="strict">
+            <value>false</value>
+        </property>
+    </bean>
+
+    <bean id="startupLog" class="org.alfresco.repo.descriptor.DescriptorStartupLog">
+       <property name="descriptorService">
+	       	<ref local="descriptorComponent"/>
+       </property>
+       <property name="tenantService">
+            <ref bean="tenantService"/>
+       </property>
+	</bean>
+
+    <!-- Workflow Scheduler - Disabled by DoQui
+    <bean id="workflowScheduler" class="org.alfresco.repo.workflow.jbpm.JBPMScheduler">
+       <property name="JBPMTemplate" ref="jbpm_template" />
+    </bean>
+    -->
+
+    <!-- Email Server - Disabled by DoQui
+    <bean id="emailServer" class="org.alfresco.email.server.impl.subetha.SubethaEmailServer">
+        <property name="enabled">
+            <value>${email.server.enabled}</value>
+        </property>
+        <property name="domain">
+            <value>${email.server.domain}</value>
+        </property>
+        <property name="port">
+            <value>${email.server.port}</value>
+        </property>
+        <property name="blockedSenders">
+            <value>${email.server.blocked.senders}</value>
+        </property>
+        <property name="allowedSenders">
+            <value>${email.server.allowed.senders}</value>
+        </property>
+        <property name="emailService">
+            <ref bean="EmailService" />
+        </property>
+    </bean>
+    -->
+
+	<!-- BONO 10/10/2007 - RIDEFINIZIONE BEAN IMPORT-EXPORT-CONTEXT -->
+	<bean id="systemInfoImporter"
+		class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.SystemInfoBootstrap"
+    	abstract="true">
+        <property name="transactionService">
+            <ref bean="transactionService"/>
+        </property>
+        <property name="nodeService">
+            <ref bean="nodeService"/>
+        </property>
+        <property name="authenticationComponent">
+            <ref bean="authenticationComponent" />
+        </property>
+        <property name="systemImporter">
+            <ref bean="systemExporterImporter" />
+        </property>
+        <property name="mustNotExistStoreUrls">
+            <list>
+                <value>${system.store}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="storeImporter"
+    	class="it.doqui.index.ecmengine.business.personalization.multirepository.bootstrap.ImporterBootstrap"
+    	abstract="true">
+        <property name="transactionService">
+            <ref bean="transactionService"/>
+        </property>
+        <property name="nodeService">
+            <ref bean="nodeService"/>
+        </property>
+        <property name="importerService">
+            <ref bean="importerComponent"/>
+        </property>
+        <property name="namespaceService">
+            <ref bean="namespaceService"/>
+        </property>
+        <property name="authenticationComponent">
+            <ref bean="authenticationComponent" />
+        </property>
+        <property name="allowWrite">
+            <value>${server.transaction.allow-writes}</value>
+        </property>
+        <!-- To specify a locale other than the system default, uncomment the following
+        <property name="locale">
+            <value>en_GB</value>
+        </property>
+        -->
+	</bean>
+
+</beans>

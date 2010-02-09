@@ -1,0 +1,45 @@
+TARGET PUBBLICI
+
+**********************************************************************
+  DISTIBUZIONE
+**********************************************************************
+ 
+--> La chiamata ad Ant senza parametri provochera' la creazione di un pacchetto
+    per ogni ambiente di esecuzione (in particolare: dev/tst/coll/prod).
+ 
+**********************************************************************
+UTILITA'
+**********************************************************************
+ 
+about: visualizza tutti i target pubblici.
+about-custom: visualizza tutti i target interni.
+show-wars: visualizza tutte le proprieta' di ambiente (chiave/valore).
+  
+clean-archives: rimuove la cartella build/archives ed il suo contenuto.
+clean-classes: rimuove tutti i file .class da build/classes.
+clean-dist: rimuove la cartella dist ed il suo contenuto.
+clean-temp: rimuove tutti i file dalla build/temp.
+clean-all: cleans all but destination dir for previous builds.
+ 
+  
+**********************************************************************
+ARCHIVI
+**********************************************************************
+  
+EJB TIER
+package-ear: crea l'archivio J2EE dell'applicazione (.ear) nella build/archives.
+ 
+WEB TIER
+package-war: crea l'archivio J2EE dell'applicazione web (.war) nella build/archives.
+ 
+APPLICATION:
+package-all: crea tutti gli archivi J2EE nella build/archives.
+ 
+ 
+**********************************************************************
+COMPILAZIONE
+**********************************************************************
+ 
+compile-all: esegue la compilazione di tutti i sorgenti.
+ 
+ 

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<weblogic-ejb-jar xmlns="http://www.bea.com/ns/weblogic/90"
+  xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.bea.com/ns/weblogic/90
+                      http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd">
+                      
+	<description>DoQui</description>
+	<!-- business.foundation.security.* EJBs -->
+	<weblogic-enterprise-bean>
+		<ejb-name>AuthenticationSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/AuthenticationSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>AuthoritySvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/AuthoritySvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>PermissionSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/PermissionSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>PersonSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+        <!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/PersonSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>OwnableSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/OwnableSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+
+	<!-- business.foundation.repository.* EJBs -->
+	<weblogic-enterprise-bean>
+		<ejb-name>ContentSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/ContentSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>NodeSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/NodeSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>NodeArchiveSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/NodeArchiveSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>DictionarySvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/DictionarySvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>SearchSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/SearchSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>TransactionSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/TransactionSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>	
+	<weblogic-enterprise-bean>
+		<ejb-name>TenantAdminSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/TenantAdminSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>RepoAdminSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/RepoAdminSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+
+	<!-- business.foundation.contentmanagement.* EJBs -->
+	<weblogic-enterprise-bean>
+		<ejb-name>LockSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/LockSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>CheckOutCheckInSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/CheckOutCheckInSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>CopySvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/CopySvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>VersionSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/VersionSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>ActionSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/ActionSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>RuleSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/RuleSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>JobSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/JobSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>AuditSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/AuditSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>AuditTrailSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/AuditTrailSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>MimetypeSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/MimetypeSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>IntegritySvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/IntegritySvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>FileFormatSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<local-jndi-name>ecmengine/ejb/FileFormatSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>NamespaceSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/NamespaceSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>FileFolderSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/FileFolderSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>CategorySvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/CategorySvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>ExportSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/ExportSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>ImportSvcBean</ejb-name>
+		<stateless-session-descriptor></stateless-session-descriptor>
+		<!-- <reference-descriptor></reference-descriptor> -->
+		<local-jndi-name>ecmengine/ejb/ImportSvcBean</local-jndi-name>
+	</weblogic-enterprise-bean>
+</weblogic-ejb-jar>

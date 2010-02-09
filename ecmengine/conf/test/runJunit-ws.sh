@@ -1,0 +1,1 @@
+java -classpath .:@@class_path_webservice_client@@ junit.textui.TestRunner it.doqui.index.ecmengine.test.AllTests

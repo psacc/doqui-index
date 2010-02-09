@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigFile xmlns="http://www.nationalarchives.gov.uk/pronom/ConfigFile">
+  <SigFile>@@DROID_SIGNATURE_FILE@@</SigFile>
+  <SigFileVersion>13</SigFileVersion>
+  <SigFileURL>http://www.nationalarchives.gov.uk/pronom/service.asmx</SigFileURL>
+  <ProxyHost>@@PROXY_HOST@@</ProxyHost>
+  <ProxyPort>@@PROXY_PORT@@</ProxyPort>
+  <PuidResolution>http://www.nationalarchives.gov.uk/pronom/</PuidResolution>
+  <BrowserPath>/usr/bin/firefox</BrowserPath>
+  <SigFileCheckFreq>1440</SigFileCheckFreq>
+  <DateLastDownload>2007-12-20T15:35:01</DateLastDownload>
+</ConfigFile>
+

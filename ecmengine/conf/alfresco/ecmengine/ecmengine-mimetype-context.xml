@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+   <bean id="ecmengineMimetypeDAO" class="it.doqui.index.ecmengine.integration.mimetype.dao.MimetypeDAO">
+       <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+
+   <bean id="mimetypeService" class="it.doqui.index.ecmengine.business.personalization.mimetype.MimetypeManager" init-method="init" >
+      <property name="configService">
+         <ref bean="mimetypeConfigService" />
+      </property>
+      <property name="contentCharsetFinder">
+         <ref bean="charset.finder"/>
+      </property>
+      <property name="mimetypeDAO">
+         <ref bean="ecmengineMimetypeDAO"/>
+      </property>
+   </bean>
+
+</beans>
